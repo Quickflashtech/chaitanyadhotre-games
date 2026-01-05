@@ -9,6 +9,19 @@ const closeButton = document.querySelector(".overlay-close");
 function openOverlay() {
   overlay.classList.add("active");
   document.body.style.overflow = "hidden";
+
+  const hint = document.querySelector(".experiment-hint");
+  if (hint) {
+  setTimeout(() => {
+    hint.style.opacity = "0";
+
+    // Remove from DOM after fade
+    setTimeout(() => {
+      hint.remove();
+    }, 600);
+  }, 6000);
+}
+
 }
 
 function closeOverlay() {
