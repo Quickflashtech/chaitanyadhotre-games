@@ -48,7 +48,7 @@ body {
 
 .intro {
   max-width: 720px;
-  margin-top: 120px;
+  margin-top: 140px;
 }
 
 .intro h1 {
@@ -58,9 +58,16 @@ body {
   letter-spacing: -0.01em;
 }
 
+.intro-sub {
+  margin-top: 16px;
+  font-size: 16px;
+  line-height: 1.6;
+  opacity: 0.6;
+  max-width: 480px;
+}
 
 .experiments {
-  margin-top: 120px;
+  margin-top: 100px;
 }
 
 .experiment-item {
@@ -85,11 +92,13 @@ body {
 }
 
 .experiment-item {
+  position: relative;
   transition: transform 300ms ease, opacity 300ms ease;
 }
 
 .experiment-item .index {
-  opacity: 0.4;
+  opacity: 0.35;
+  transition: opacity 300ms ease, transform 300ms ease;
 }
 
 .experiment-item:hover {
@@ -97,7 +106,8 @@ body {
 }
 
 .experiment-item:hover .index {
-  opacity: 0.8;
+  opacity: 0.75;
+  transform: translateX(-4px);
 }
 
 .experiment-item {
@@ -210,5 +220,17 @@ body {
   background: rgba(255, 255, 255, 0.6);
 }
 
+
+
+
+
+
+
+
+.site-footer {
+  margin-top: 160px;
+  font-size: 13px;
+  opacity: 0.4;
+}
 
 
