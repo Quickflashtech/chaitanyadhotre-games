@@ -90,6 +90,25 @@ function animateWeight() {
 
   weightCircle.style.left = `${currentX}px`;
   weightCircle.style.top = `${currentY}px`;
+  weightCircle.style.transform = `translate(-50%, -50%) scale(${currentScale})`;
+
+  let currentScale = 1;
+  const BASE_SCALE = 1;
+  const MIN_SCALE = 0.92;
+  const SCALE_EASING = 0.12; // how smoothly scale changes
+
+
+  const dx = targetX - currentX;
+  const dy = targetY - currentY;
+  const speed = Math.sqrt(dx * dx + dy * dy);
+
+// Map speed to scale (clamped)
+  const speedFactor = Math.min(speed / 120, 1); // 0 → 1
+  const targetScale =
+  BASE_SCALE - speedFactor * (BASE_SCALE - MIN_SCALE);
+
+// Smooth scale toward target
+currentScale += (targetScale - currentScale) * SCALE_EASING;
 
   requestAnimationFrame(animateWeight);
 }
