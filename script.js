@@ -26,7 +26,7 @@ function showExperimentHint() {
   hintElement.textContent =
     "Move your cursor. Notice how mass responds.";
 
-  document.body.appendChild(hintElement);
+  overlay.appendChild(hintElement);
 
   hintTimeout = setTimeout(() => {
     if (!hintElement) return;
