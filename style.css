@@ -210,8 +210,8 @@ body {
   pointer-events: none;
   z-index: 9999;
   transition:
-    width 200ms ease,
-    height 200ms ease,
+    width 380ms ease,
+    height 380ms ease,
     opacity 250ms ease,
     background-color 200ms ease;
     opacity: 1;
