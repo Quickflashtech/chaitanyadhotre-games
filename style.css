@@ -215,11 +215,18 @@ body {
   pointer-events: none;
   z-index: 9999;
   transition:
-    background-color 200ms ease,
-    opacity 300ms ease;
-    transform 200m ease;
-  opacity: 1;
-  mix-blend-mode: difference;
+    width 200ms ease,
+    height 200ms ease,
+    opacity 250ms ease,
+    background-color 200ms ease;
+    opacity: 1;
+    mix-blend-mode: difference;
+}
+
+.cursor-dot.cursor-active {
+  width: 28px;
+  height: 28px;
+  background-color: rgba(255, 255, 255, 0.7);
 }
 
 .cursor-hover {
