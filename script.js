@@ -102,7 +102,7 @@ if (closeButton) {
   const distance = Math.sqrt(dx * dx + dy * dy);
 
   const AVOID_RADIUS = 100;   // how close before repulsion
-  const PUSH_STRENGTH = 30;  // how strongly it moves away
+  const PUSH_STRENGTH = 50;  // how strongly it moves away
 
   if (distance < AVOID_RADIUS && distance > 0.001) {
     const force = (AVOID_RADIUS - distance) / AVOID_RADIUS;
