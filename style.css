@@ -2,6 +2,18 @@
 
 * {
   box-sizing: border-box;
+  cursor: none !important;
+}
+
+button,
+a,
+[role="button"] {
+  cursor: none !important;
+}
+
+button:focus-visible,
+a:focus-visible {
+  cursor: none !important;
 }
 
 body {
@@ -79,7 +91,7 @@ body {
 }
 
 .experiment-item {
-  cursor: pointer;
+  cursor: none !important;
 }
 
 /* Overlay base */
@@ -186,6 +198,7 @@ body {
     opacity 300ms ease;
     transform 200m ease;
   opacity: 1;
+  mix-blend-mode: difference;
 }
 
 .cursor-hover {
