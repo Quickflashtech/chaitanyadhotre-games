@@ -273,18 +273,6 @@ body {
     font-size: 15px;
   }
     
-  h1{
-    font-size: 28px;
-  }
-
-  h2{
-      font-size: 15px;
-    }
-
-  .experiment-item {
-    font-size: 24px;
-  }
-  
   .overlay.active .experiment-content {
     display: none;
   }
@@ -303,7 +291,11 @@ body {
   
 }
 
-
+@media (max-width: 768px) {
+  .intro h1 { font-size: 28px; }
+  h2 { font-size: 15px; }
+  .experiment-item { font-size: 24px; }
+}
 
 
 
