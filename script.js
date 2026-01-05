@@ -51,7 +51,6 @@ document.addEventListener("mousemove", (e) => {
   cursorDot.style.opacity = nearEdge ? "0" : "1";
 });
 
-
 const hoverTargets = document.querySelectorAll("button");
 
 hoverTargets.forEach((el) => {
