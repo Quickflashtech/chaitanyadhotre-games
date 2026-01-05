@@ -69,6 +69,11 @@ let currentY = targetY;
 // How heavy the circle feels (lower = heavier)
 const EASING = 0.04;
 
+  let currentScale = 1;
+  const BASE_SCALE = 1;
+  const MIN_SCALE = 0.92;
+  const SCALE_EASING = 0.12; // how smoothly scale changes
+
 const hoverTargets = document.querySelectorAll("button");
 
 hoverTargets.forEach((el) => {
@@ -85,20 +90,7 @@ function animateWeight() {
   currentX += (targetX - currentX) * EASING;
   currentY += (targetY - currentY) * EASING;
 
-  if (Math.abs(targetX - currentX) < 0.1) currentX = targetX;
-  if (Math.abs(targetY - currentY) < 0.1) currentY = targetY;
-
-  weightCircle.style.left = `${currentX}px`;
-  weightCircle.style.top = `${currentY}px`;
-  weightCircle.style.transform = `translate(-50%, -50%) scale(${currentScale})`;
-
-  let currentScale = 1;
-  const BASE_SCALE = 1;
-  const MIN_SCALE = 0.92;
-  const SCALE_EASING = 0.12; // how smoothly scale changes
-
-
-  const dx = targetX - currentX;
+    const dx = targetX - currentX;
   const dy = targetY - currentY;
   const speed = Math.sqrt(dx * dx + dy * dy);
 
@@ -108,7 +100,11 @@ function animateWeight() {
   BASE_SCALE - speedFactor * (BASE_SCALE - MIN_SCALE);
 
 // Smooth scale toward target
-currentScale += (targetScale - currentScale) * SCALE_EASING;
+  currentScale += (targetScale - currentScale) * SCALE_EASING;
+
+  weightCircle.style.left = `${currentX}px`;
+  weightCircle.style.top = `${currentY}px`;
+  weightCircle.style.transform = `translate(-50%, -50%) scale(${currentScale})`;
 
   requestAnimationFrame(animateWeight);
 }
