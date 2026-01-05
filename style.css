@@ -148,7 +148,9 @@ body {
 
 .overlay-close:hover {
   opacity: 1;
+  transform: scale(1.1);
 }
+
 
 /* Inner experiment area */
 
@@ -169,6 +171,7 @@ body {
   background: #f2f2f2;
   border-radius: 50%;
   transform: translate(-50%, -50%);
+  pointer-events: none;
 }
 
 
