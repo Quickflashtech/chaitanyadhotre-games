@@ -85,6 +85,9 @@ function animateWeight() {
   currentX += (targetX - currentX) * EASING;
   currentY += (targetY - currentY) * EASING;
 
+  if (Math.abs(targetX - currentX) < 0.1) currentX = targetX;
+  if (Math.abs(targetY - currentY) < 0.1) currentY = targetY;
+
   weightCircle.style.left = `${currentX}px`;
   weightCircle.style.top = `${currentY}px`;
 
