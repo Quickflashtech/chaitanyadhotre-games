@@ -67,7 +67,7 @@ let currentX = targetX;
 let currentY = targetY;
 
 // How heavy the circle feels (lower = heavier)
-const EASING = 0.08;
+const EASING = 0.04;
 
 const hoverTargets = document.querySelectorAll("button");
 
@@ -85,9 +85,8 @@ function animateWeight() {
   currentX += (targetX - currentX) * EASING;
   currentY += (targetY - currentY) * EASING;
 
-  weightCircle.style.transform = `
-    translate(${currentX - 42.5}px, ${currentY - 42.5}px)
-  `;
+  weightCircle.style.left = `${currentX}px`;
+  weightCircle.style.top = `${currentY}px`;
 
   requestAnimationFrame(animateWeight);
 }
