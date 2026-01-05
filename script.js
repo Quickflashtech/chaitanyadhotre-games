@@ -13,6 +13,8 @@ if (isMobile) {
 
 let hintTimeout = null;
 let hintElement = null;
+let idleTime = 0;
+
 
 
 //Overlay hint
@@ -171,6 +173,16 @@ if (closeButton) {
     adjustedTargetX += (dx / distance) * force * PUSH_STRENGTH;
     adjustedTargetY += (dy / distance) * force * PUSH_STRENGTH;
   }
+}
+
+  if (isMobile) {
+  idleTime += 0.01;
+
+  adjustedTargetX =
+    window.innerWidth / 2 + Math.sin(idleTime) * 40;
+
+  adjustedTargetY =
+    window.innerHeight / 2 + Math.cos(idleTime * 0.8) * 30;
 }
 
 currentX += (adjustedTargetX - currentX) * EASING;
