@@ -111,3 +111,17 @@ function animateWeight() {
 
 animateWeight();
 
+// Increasing curson on experiments
+const interactiveElements = document.querySelectorAll(".experiment-item");
+
+interactiveElements.forEach((el) => {
+  el.addEventListener("mouseenter", () => {
+    cursorDot.classList.add("cursor-active");
+  });
+
+  el.addEventListener("mouseleave", () => {
+    cursorDot.classList.remove("cursor-active");
+  });
+});
+
+
