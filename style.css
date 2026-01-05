@@ -174,4 +174,23 @@ body {
   pointer-events: none;
 }
 
+/* Custom cursor dot */
+.cursor-dot {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.9);
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  z-index: 2000;
+  transition:
+    background-color 200ms ease,
+    opacity 300ms ease;
+  opacity: 1;
+}
+
+
 
