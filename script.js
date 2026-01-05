@@ -4,6 +4,12 @@ const overlay = document.querySelector(".overlay");
 const closeBtn = document.querySelector(".overlay-close");
 const overlayBg = document.querySelector(".overlay-bg");
 const closeButton = document.querySelector(".overlay-close");
+const isMobile = window.matchMedia("(max-width: 768px)").matches;
+
+if (isMobile) {
+  // Do not initialize cursor or animation logic on mobile
+  document.body.style.cursor = "auto";
+}
 
 let hintTimeout = null;
 let hintElement = null;
@@ -86,6 +92,7 @@ window.addEventListener("keydown", (e) => {
 const cursorDot = document.querySelector(".cursor-dot");
 const EDGE = 20;
 
+if (!isMobile) {
 document.addEventListener("mousemove", (e) => {
   const x = e.clientX;
   const y = e.clientY;
@@ -110,6 +117,9 @@ document.addEventListener("mousemove", (e) => {
 
   cursorDot.style.opacity = nearEdge ? "0" : "1";
 });
+}
+
+
 
 
 const weightCircle = document.querySelector(".circle");
@@ -185,7 +195,8 @@ currentY += (adjustedTargetY - currentY) * EASING;
   requestAnimationFrame(animateWeight);
 }
 
-animateWeight();
+  animateWeight();
+
 
 // Increasing curson on experiments
 const interactiveElements = document.querySelectorAll(".experiment-item");
