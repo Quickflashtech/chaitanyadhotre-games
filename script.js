@@ -16,7 +16,14 @@ function closeOverlay() {
 
 experimentBtn.addEventListener("click", openOverlay);
 closeBtn.addEventListener("click", closeOverlay);
-overlayBg.addEventListener("click", closeOverlay);
+overlay.addEventListener("click", closeOverlay);
+
+const overlayContent = document.querySelector(".overlay-content");
+
+overlayContent.addEventListener("click", (e) => {
+  e.stopPropagation();
+});
+
 
 window.addEventListener("keydown", (e) => {
   if (e.key === "Escape") closeOverlay();
