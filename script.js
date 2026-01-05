@@ -30,9 +30,7 @@ window.addEventListener("keydown", (e) => {
 });
 
 const cursorDot = document.querySelector(".cursor-dot");
-
-const EDGE_X = 20;
-const EDGE_Y = 10;
+const EDGE = 20;
 
 window.addEventListener("mousemove", (e) => {
   const x = e.clientX;
@@ -45,10 +43,10 @@ window.addEventListener("mousemove", (e) => {
   const vh = window.innerHeight;
 
   const nearEdge =
-    x < EDGE_X ||
-    x > vw - EDGE_X ||
-    y < EDGE_Y ||
-    y > vh - EDGE_Y;
+    x < EDGE ||
+    x > vw - EDGE ||
+    y < EDGE ||
+    y > vh - EDGE;
 
   cursorDot.style.opacity = nearEdge ? "0" : "1";
 });
