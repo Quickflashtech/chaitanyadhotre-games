@@ -3,6 +3,8 @@ const experimentBtn = document.querySelector(".experiment-item");
 const overlay = document.querySelector(".overlay");
 const closeBtn = document.querySelector(".overlay-close");
 const overlayBg = document.querySelector(".overlay-bg");
+const closeButton = document.querySelector(".overlay-close");
+
 
 function openOverlay() {
   overlay.classList.add("active");
@@ -87,8 +89,30 @@ hoverTargets.forEach((el) => {
 });
 
 function animateWeight() {
-  currentX += (targetX - currentX) * EASING;
-  currentY += (targetY - currentY) * EASING;
+let adjustedTargetX = targetX;
+let adjustedTargetY = targetY;
+
+if (closeButton) {
+  const rect = closeButton.getBoundingClientRect();
+  const cx = rect.left + rect.width / 2;
+  const cy = rect.top + rect.height / 2;
+
+  const dx = targetX - cx;
+  const dy = targetY - cy;
+  const distance = Math.sqrt(dx * dx + dy * dy);
+
+  const AVOID_RADIUS = 90;   // how close before repulsion
+  const PUSH_STRENGTH = 45;  // how strongly it moves away
+
+  if (distance < AVOID_RADIUS && distance > 0.001) {
+    const force = (AVOID_RADIUS - distance) / AVOID_RADIUS;
+    adjustedTargetX += (dx / distance) * force * PUSH_STRENGTH;
+    adjustedTargetY += (dy / distance) * force * PUSH_STRENGTH;
+  }
+}
+
+currentX += (adjustedTargetX - currentX) * EASING;
+currentY += (adjustedTargetY - currentY) * EASING;
 
     const dx = targetX - currentX;
   const dy = targetY - currentY;
