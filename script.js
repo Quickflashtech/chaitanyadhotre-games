@@ -29,16 +29,14 @@ window.addEventListener("keydown", (e) => {
   if (e.key === "Escape") closeOverlay();
 });
 
-const cursorDot = document.querySelector(".cursor-dot");
-const EDGE = 20;
-
-window.addEventListener("mousemove", (e) => {
+document.addEventListener("mousemove", (e) => {
   const x = e.clientX;
   const y = e.clientY;
 
   cursorDot.style.left = `${x}px`;
   cursorDot.style.top = `${y}px`;
 
+  const EDGE = 20;
   const vw = window.innerWidth;
   const vh = window.innerHeight;
 
