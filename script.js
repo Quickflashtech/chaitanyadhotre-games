@@ -5,28 +5,66 @@ const closeBtn = document.querySelector(".overlay-close");
 const overlayBg = document.querySelector(".overlay-bg");
 const closeButton = document.querySelector(".overlay-close");
 
+let hintTimeout = null;
+let hintElement = null;
 
-function openOverlay() {
-  overlay.classList.add("active");
-  document.body.style.overflow = "hidden";
 
-  const hint = document.querySelector(".experiment-hint");
-  if (hint) {
-  setTimeout(() => {
-    hint.style.opacity = "0";
+//Overlay hint
+function showExperimentHint() {
+  // Clean up if something already exists
+  if (hintElement) {
+    hintElement.remove();
+    hintElement = null;
+  }
+  if (hintTimeout) {
+    clearTimeout(hintTimeout);
+    hintTimeout = null;
+  }
 
-    // Remove from DOM after fade
+  hintElement = document.createElement("div");
+  hintElement.className = "experiment-hint";
+  hintElement.textContent =
+    "Move your cursor. Notice how mass responds.";
+
+  document.body.appendChild(hintElement);
+
+  hintTimeout = setTimeout(() => {
+    if (!hintElement) return;
+
+    hintElement.style.opacity = "0";
+
     setTimeout(() => {
-      hint.remove();
+      if (hintElement) {
+        hintElement.remove();
+        hintElement = null;
+      }
     }, 600);
   }, 6000);
 }
 
+function removeExperimentHint() {
+  if (hintTimeout) {
+    clearTimeout(hintTimeout);
+    hintTimeout = null;
+  }
+
+  if (hintElement) {
+    hintElement.remove();
+    hintElement = null;
+  }
+}
+
+function openOverlay() {
+  overlay.classList.add("active");
+  document.body.style.overflow = "hidden";
+  showExperimentHint();
 }
 
 function closeOverlay() {
   overlay.classList.remove("active");
   document.body.style.overflow = "";
+  removeExperimentHint();
+
 }
 
 experimentBtn.addEventListener("click", openOverlay);
@@ -42,6 +80,7 @@ overlayContent.addEventListener("click", (e) => {
 
 window.addEventListener("keydown", (e) => {
   if (e.key === "Escape") closeOverlay();
+  removeExperimentHint();
 });
 
 const cursorDot = document.querySelector(".cursor-dot");
