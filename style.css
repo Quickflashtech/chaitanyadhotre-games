@@ -30,10 +30,11 @@ body {
 
 .intro h1 {
   font-size: 40px;
-  font-weight: 500;
-  line-height: 1.2;
-  margin: 0;
+  font-weight: 450;
+  line-height: 1.25;
+  letter-spacing: -0.01em;
 }
+
 
 .experiments {
   margin-top: 120px;
@@ -50,3 +51,25 @@ body {
   cursor: pointer;
   padding: 0;
 }
+
+.experiment-item {
+  transition: transform 300ms ease, opacity 300ms ease;
+}
+
+.experiment-item .index {
+  opacity: 0.4;
+}
+
+.experiment-item:hover {
+  transform: translateX(6px);
+}
+
+.experiment-item:hover .index {
+  opacity: 0.8;
+}
+
+.experiment-item {
+  cursor: pointer;
+}
+
+
