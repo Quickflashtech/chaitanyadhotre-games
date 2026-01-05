@@ -31,14 +31,23 @@ window.addEventListener("keydown", (e) => {
 
 const cursorDot = document.querySelector(".cursor-dot");
 
+let cursorVisible = true;
+
 window.addEventListener("mousemove", (e) => {
   cursorDot.style.left = `${e.clientX}px`;
   cursorDot.style.top = `${e.clientY}px`;
-  cursorDot.style.opacity = "1";
+
+  if (!cursorVisible) {
+    cursorDot.style.opacity = "1";
+    cursorVisible = true;
+  }
 });
 
-window.addEventListener("mouseleave", () => {
-  cursorDot.style.opacity = "0";
+window.addEventListener("mouseout", (e) => {
+  if (!e.relatedTarget && !e.toElement) {
+    cursorDot.style.opacity = "0";
+    cursorVisible = false;
+  }
 });
 
 const hoverTargets = document.querySelectorAll("button");
