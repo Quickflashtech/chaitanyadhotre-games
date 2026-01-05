@@ -150,4 +150,15 @@ body {
   height: 100%;
 }
 
+.overlay::after {
+  content: "Click anywhere to close";
+  position: fixed;
+  bottom: 32px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 12px;
+  opacity: 0.4;
+  pointer-events: none;
+}
+
 
