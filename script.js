@@ -36,11 +36,17 @@ document.addEventListener("mousemove", (e) => {
   const x = e.clientX;
   const y = e.clientY;
 
+  // cursor dot
   cursorDot.style.left = `${x}px`;
   cursorDot.style.top = `${y}px`;
 
+  // weight target
+  targetX = x;
+  targetY = y;
+
   const vw = window.innerWidth;
   const vh = window.innerHeight;
+  const EDGE = 20;
 
   const nearEdge =
     x < EDGE ||
@@ -50,6 +56,18 @@ document.addEventListener("mousemove", (e) => {
 
   cursorDot.style.opacity = nearEdge ? "0" : "1";
 });
+
+
+const weightCircle = document.querySelector(".circle");
+
+let targetX = window.innerWidth / 2;
+let targetY = window.innerHeight / 2;
+
+let currentX = targetX;
+let currentY = targetY;
+
+// How heavy the circle feels (lower = heavier)
+const EASING = 0.08;
 
 const hoverTargets = document.querySelectorAll("button");
 
@@ -63,4 +81,16 @@ hoverTargets.forEach((el) => {
   });
 });
 
+function animateWeight() {
+  currentX += (targetX - currentX) * EASING;
+  currentY += (targetY - currentY) * EASING;
+
+  weightCircle.style.transform = `
+    translate(${currentX - 42.5}px, ${currentY - 42.5}px)
+  `;
+
+  requestAnimationFrame(animateWeight);
+}
+
+animateWeight();
 
