@@ -11,3 +11,42 @@ body {
   font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
 }
 
+.home {
+  padding: 80px 96px;
+}
+
+.brand {
+  position: fixed;
+  top: 32px;
+  left: 48px;
+  font-size: 14px;
+  opacity: 0.6;
+}
+
+.intro {
+  max-width: 720px;
+  margin-top: 120px;
+}
+
+.intro h1 {
+  font-size: 40px;
+  font-weight: 500;
+  line-height: 1.2;
+  margin: 0;
+}
+
+.experiments {
+  margin-top: 120px;
+}
+
+.experiment-item {
+  background: none;
+  border: none;
+  color: inherit;
+  font: inherit;
+  display: flex;
+  gap: 24px;
+  font-size: 28px;
+  cursor: pointer;
+  padding: 0;
+}
