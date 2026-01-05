@@ -52,6 +52,16 @@ body {
   padding: 0;
 }
 
+.experiment-item:focus {
+  outline: none;
+}
+
+.experiment-item:focus-visible {
+  outline: none;
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+}
+
 .experiment-item {
   transition: transform 300ms ease, opacity 300ms ease;
 }
@@ -84,7 +94,7 @@ body {
 .overlay-bg {
   position: absolute;
   inset: 0;
-  background: rgba(0, 0, 0, 0.6);
+  background: rgba(0, 0, 0, 0.75);
   opacity: 0;
   transition: opacity 400ms ease;
 }
@@ -98,6 +108,7 @@ body {
   opacity: 0;
   transform: scale(0.96);
   transition: opacity 400ms ease, transform 400ms ease;
+  background: rgba(255, 255, 255, 0.02);
 }
 
 .overlay.active {
