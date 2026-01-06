@@ -89,25 +89,6 @@ body {
     opacity 300ms ease;
 }
 
-
-
-.index::after {
-  content: "";
-  position: absolute;
-  left: 50%;
-  top: 100%;
-
-  width: 1px;
-  height: 0;
-
-  background: currentColor;
-  opacity: 0.25;
-
-  transform: translateX(-50%);
-  transition: height 240ms ease;
-}
-
-
 .experiment-item {
   display: flex;
   align-items: flex-start;
@@ -130,12 +111,6 @@ body {
 }
 
 
-.experiment-item .index {
-  line-height: 1.1;
-  opacity: 0.35;
-  transition: opacity 300ms ease, transform 300ms ease;
-}
-
 .experiment-item:hover {
   transform: translateX(6px);
 }
@@ -144,12 +119,6 @@ body {
   font-size: 42px;
   line-height: 1.15;
   opacity: 0.75;
-}
-
-
-
-.experiment-item:hover .index::after {
-  height: 28px; /* matches title + meta spacing */
 }
 
 
