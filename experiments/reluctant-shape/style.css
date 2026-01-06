@@ -40,6 +40,8 @@
 
   font-size: 28px;
   opacity: 0.6;
+   pointer-events:auto;
+   z-index:1200;
 }
 
 .overlay-close:hover {
@@ -51,6 +53,7 @@
 .reluctant-stage {
   position: fixed;
   inset: 0;
+  pointer-events: none;
 }
  
 .reluctant-circle {
