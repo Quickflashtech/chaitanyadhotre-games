@@ -12,6 +12,10 @@ body {
 * {
   box-sizing: border-box;
   cursor: none !important;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }
 
 button,
@@ -337,10 +341,14 @@ body {
   right: 24px;
   bottom: 20px;
   font-size: 13px;
-  opacity: 0.35;
+  opacity: 0;
   pointer-events: none;
   user-select: none;
-  transition: opacity 200ms ease;
+  transition: opacity 600ms ease;
+}
+
+.page-content.is-visible ~ .site-footer {
+  opacity: 0.35;
 }
 
 .site-footer:hover {
