@@ -127,8 +127,8 @@ function animate() {
   vy *= FRICTION;
 
   // Render
-  circle.style.transform =
-    `translate(${x}px, ${y}px) translate(-50%, -50%)`;
+circle.style.left = `${x}px`;
+circle.style.top = `${y}px`;
 
   requestAnimationFrame(animate);
 }
