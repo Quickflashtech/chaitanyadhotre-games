@@ -48,7 +48,7 @@ function closeExperiment() {
 
   setTimeout(() => {
     window.history.back();
-  }, 260);
+  }, 280);
 }
 
 if (closeBtn) {
