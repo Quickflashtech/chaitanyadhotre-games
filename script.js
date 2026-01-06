@@ -4,14 +4,31 @@ const isMobile = window.matchMedia("(max-width: 768px)").matches;
 const cursorDot = document.querySelector(".cursor-dot");
 const transition = document.querySelector(".page-transition");
 
+
 // --------------------
 // Cursor logic (simple, consistent)
 // --------------------
 if (!isMobile && cursorDot) {
-  document.addEventListener("mousemove", (e) => {
-    cursorDot.style.left = `${e.clientX}px`;
-    cursorDot.style.top = `${e.clientY}px`;
-  });
+  const EDGE = 20;
+document.addEventListener("mousemove", (e) => {
+  const x = e.clientX;
+  const y = e.clientY;
+
+  cursorDot.style.left = `${x}px`;
+  cursorDot.style.top = `${y}px`;
+
+  const vw = window.innerWidth;
+  const vh = window.innerHeight;
+
+  const nearEdge =
+    x < EDGE ||
+    x > vw - EDGE ||
+    y < EDGE ||
+    y > vh - EDGE;
+
+  cursorDot.style.opacity = nearEdge ? "0" : "1";
+});
+
 
   // Hover states
   document.querySelectorAll("a, button").forEach((el) => {
@@ -24,6 +41,18 @@ if (!isMobile && cursorDot) {
     });
   });
 }
+
+// Expand cursor on experiment items
+document.querySelectorAll(".experiment-item").forEach((el) => {
+  el.addEventListener("mouseenter", () => {
+    cursorDot.classList.add("cursor-active");
+  });
+
+  el.addEventListener("mouseleave", () => {
+    cursorDot.classList.remove("cursor-active");
+  });
+});
+
 
 // --------------------
 // Page transition for experiments
