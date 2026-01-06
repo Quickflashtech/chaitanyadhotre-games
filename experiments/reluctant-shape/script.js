@@ -44,13 +44,13 @@ function animate() {
       vx += (dx / dist) * force * REPULSE_STRENGTH;
       vy += (dy / dist) * force * REPULSE_STRENGTH;
     }
-    // Idle drift (only when no mouse influence)
+  }
+
+  // Idle drift (only when no mouse)
   if (mouseX === null) {
     idleTime += IDLE_SPEED;
-
     vx += Math.sin(idleTime * 1.3) * IDLE_FORCE;
     vy += Math.cos(idleTime * 1.1) * IDLE_FORCE;
-    }
   }
 
   // Edge correction (push back toward center)
