@@ -45,16 +45,16 @@
 }
  
 .reluctant-circle {
-  position: fixed;
-  left: 0;
-  top: 0;
-
+  position: absolute;
   width: 96px;
   height: 96px;
-
   border-radius: 50%;
   background: #f2f2f2;
 
+  left: 0;
+  top: 0;
+
+  transform: translate(-50%, -50%);
   pointer-events: none;
 }
 
