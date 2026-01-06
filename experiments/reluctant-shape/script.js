@@ -53,7 +53,11 @@ if (stage) {
 
 // ---- animation ----
 function animate() {
-  // Cursor repulsion
+  // ----- shared center reference -----
+  const cx = window.innerWidth / 2;
+  const cy = window.innerHeight / 2;
+
+  // ----- Cursor repulsion -----
   if (mouseX !== null) {
     const dx = x - mouseX;
     const dy = y - mouseY;
@@ -66,7 +70,7 @@ function animate() {
     }
   }
 
-  // Idle drift (when cursor influence is weak)
+  // ----- Idle drift (when cursor influence is weak) -----
   let idleAllowed = true;
 
   if (mouseX !== null) {
@@ -89,44 +93,39 @@ function animate() {
     vy += Math.cos(idleTime * 1.1) * IDLE_FORCE * idleMod;
   }
 
-  // Gentle center bias
-  // Soft territory (only when drifting too far)
-// Soft territory (only when drifting too far)
-const dxCenter = x - cx;
-const dyCenter = y - cy;
-const distFromCenter = Math.hypot(dxCenter, dyCenter);
+  // ----- Soft territory (NOT centering) -----
+  const dxCenter = x - cx;
+  const dyCenter = y - cy;
+  const distFromCenter = Math.hypot(dxCenter, dyCenter);
 
-const TERRITORY_RADIUS = 260;
+  const TERRITORY_RADIUS = 260;
 
-if (distFromCenter > TERRITORY_RADIUS) {
-  const excess = distFromCenter - TERRITORY_RADIUS;
-  const pull = excess * 0.00006;
+  if (distFromCenter > TERRITORY_RADIUS) {
+    const excess = distFromCenter - TERRITORY_RADIUS;
+    const pull = excess * 0.00006;
 
-  vx -= (dxCenter / distFromCenter) * pull;
-  vy -= (dyCenter / distFromCenter) * pull;
-}
+    vx -= (dxCenter / distFromCenter) * pull;
+    vy -= (dyCenter / distFromCenter) * pull;
+  }
 
-  // Edge correction
-  const cx = window.innerWidth / 2;
-  const cy = window.innerHeight / 2;
-
+  // ----- Edge correction -----
   if (x < EDGE_PADDING) vx += (cx - x) * EDGE_FORCE;
   if (x > window.innerWidth - EDGE_PADDING) vx += (cx - x) * EDGE_FORCE;
 
   if (y < EDGE_PADDING) vy += (cy - y) * EDGE_FORCE;
   if (y > window.innerHeight - EDGE_PADDING) vy += (cy - y) * EDGE_FORCE;
 
-  // Integrate
+  // ----- Integrate -----
   x += vx;
   y += vy;
 
-  // Friction
+  // ----- Friction -----
   vx *= FRICTION;
   vy *= FRICTION;
 
-  // Render
-circle.style.left = `${x}px`;
-circle.style.top = `${y}px`;
+  // ----- Render -----
+  circle.style.left = `${x}px`;
+  circle.style.top = `${y}px`;
 
   requestAnimationFrame(animate);
 }
