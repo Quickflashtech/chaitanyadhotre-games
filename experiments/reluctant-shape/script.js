@@ -83,17 +83,15 @@ function removeHint() {
 }
 
 // ---- mouse tracking ----
-if (stage) {
-  stage.addEventListener("mousemove", (e) => {
-    mouseX = e.clientX;
-    mouseY = e.clientY;
-  });
+window.addEventListener("mousemove", (e) => {
+  mouseX = e.clientX;
+  mouseY = e.clientY;
+});
 
-  stage.addEventListener("mouseleave", () => {
-    mouseX = null;
-    mouseY = null;
-  });
-}
+window.addEventListener("mouseleave", () => {
+  mouseX = null;
+  mouseY = null;
+});
 
 // ---- animation ----
 function animate() {
