@@ -1,6 +1,16 @@
 const circle = document.querySelector(".reluctant-circle");
 const stage = document.querySelector(".reluctant-stage");
 const closeBtn = document.querySelector(".overlay-close");
+const pageTransition = document.querySelector(".page-transition");
+
+// Fade IN on load
+if (pageTransition) {
+  pageTransition.classList.add("active");
+
+  requestAnimationFrame(() => {
+    pageTransition.classList.remove("active");
+  });
+}
 
 // ---- constants ----
 const IDLE_FORCE = 0.006;
@@ -26,17 +36,51 @@ let mouseX = null;
 let mouseY = null;
 
 // ---- close logic ----
-if (closeBtn) {
-  closeBtn.addEventListener("click", () => {
+function closeExperiment() {
+  removeHint();
+
+  if (!pageTransition) {
     window.history.back();
-  });
+    return;
+  }
+
+  pageTransition.classList.add("active");
+
+  setTimeout(() => {
+    window.history.back();
+  }, 260);
+}
+
+if (closeBtn) {
+  closeBtn.addEventListener("click", closeExperiment);
 }
 
 window.addEventListener("keydown", (e) => {
-  if (e.key === "Escape") {
-    window.history.back();
-  }
+  if (e.key === "Escape") closeExperiment();
 });
+
+let hintTimeout = null;
+let hintEl = null;
+
+function showHint() {
+  if (window.matchMedia("(max-width: 768px)").matches) return;
+
+  hintEl = document.createElement("div");
+  hintEl.className = "experiment-hint";
+  hintEl.textContent = "Move closer. The shape resists.";
+
+  document.body.appendChild(hintEl);
+
+  hintTimeout = setTimeout(() => {
+    hintEl.style.opacity = "0";
+    setTimeout(() => hintEl.remove(), 600);
+  }, 6000);
+}
+
+function removeHint() {
+  if (hintTimeout) clearTimeout(hintTimeout);
+  if (hintEl) hintEl.remove();
+}
 
 // ---- mouse tracking ----
 if (stage) {
@@ -129,4 +173,5 @@ function animate() {
 
   requestAnimationFrame(animate);
 }
+showHint();
 animate();
