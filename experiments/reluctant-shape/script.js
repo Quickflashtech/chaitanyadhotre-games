@@ -79,11 +79,30 @@ if (mouseX !== null) {
   }
 }
 
+// Idle drift (when cursor influence is weak)
+let idleAllowed = true;
+
+if (mouseX !== null) {
+  const dx = x - mouseX;
+  const dy = y - mouseY;
+  const dist = Math.hypot(dx, dy);
+
+  if (dist < REPULSE_RADIUS * 1.2) {
+    idleAllowed = false;
+  }
+}
+
 if (idleAllowed) {
   idleTime += IDLE_SPEED;
-  vx += Math.sin(idleTime * 1.3) * IDLE_FORCE;
-  vy += Math.cos(idleTime * 1.1) * IDLE_FORCE;
+
+  const idleMod =
+    0.6 + Math.sin(idleTime * 0.15) * 0.4;
+
+  vx += Math.sin(idleTime * 1.3) * IDLE_FORCE * idleMod;
+  vy += Math.cos(idleTime * 1.1) * IDLE_FORCE * idleMod;
 }
+  vx += (window.innerWidth / 2 - x) * 0.00002;
+vy += (window.innerHeight / 2 - y) * 0.00002;
 
   // Edge correction
   const cx = window.innerWidth / 2;
