@@ -65,6 +65,17 @@ body {
 /* =========================
    Experiments list
    ========================= */
+.collection-status {
+  margin-top: 64px;
+  margin-bottom: 12px;
+
+  font-size: 13px;
+  letter-spacing: 0.02em;
+  opacity: 0.45;
+
+  user-select: none;
+}
+
 .experiments {
   margin-top: 100px;
 }
