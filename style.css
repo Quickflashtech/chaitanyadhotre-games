@@ -77,17 +77,18 @@ body {
 
 .index {
   display: inline-block;
+
+  font-size: 28px;
   line-height: 1.1;
 
   opacity: 0.35;
 
-  transform: scaleY(1);
-  transform-origin: top;
-
   transition:
-    opacity 300ms ease,
-    transform 260ms ease;
+    font-size 240ms ease,
+    line-height 240ms ease,
+    opacity 300ms ease;
 }
+
 
 
 .index::after {
@@ -140,10 +141,11 @@ body {
 }
 
 .experiment-item:hover .index {
+  font-size: 42px;
+  line-height: 1.15;
   opacity: 0.75;
-  transform: scaleY(1.55);
-  letter-spacing: 0.02em;
 }
+
 
 
 .experiment-item:hover .index::after {
