@@ -1,23 +1,48 @@
 html, body {
+  width: 100%;
+  height: 100%;
   margin: 0;
   padding: 0;
-  background: #000;
-  color: #fff;
-  height: 100%;
+  background: #0b0b0b;
+  color: #f5f5f5;
 }
 
-.experiment-hint {
+.circle {
+  position: absolute;
+  width: 85px;
+  height: 85px;
+  background: #f2f2f2;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+}
+
+/* Custom cursor dot */
+.cursor-dot {
   position: fixed;
-  top: 24px;
-  left: 50%;
-  transform: translateX(-50%);
-
-  font-size: 14px;
-  opacity: 0.6;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.9);
+  transform: translate(-50%, -50%);
   pointer-events: none;
-  user-select: none;
+  z-index: 9999;
+  transition:
+    width 380ms ease,
+    height 380ms ease,
+    opacity 250ms ease,
+    background-color 200ms ease;
+    opacity: 1;
+    mix-blend-mode: difference;
+}
 
-  transition: opacity 600ms ease;
+.cursor-dot.cursor-active {
+  width: 38px;
+  height: 38px;
+  background-color: rgba(255, 255, 255, 0.7);
+}
+
+.cursor-hover {
+  background: rgba(255, 255, 255, 0.6);
 }
 
 /* Overlay base */
@@ -84,9 +109,6 @@ html, body {
   transform: scale(1.15);
 }
 
-
-/* Inner experiment area */
-
 /* Experiment: Cursor Weight (visual only) */
 
 .overlay-inner {
@@ -95,42 +117,19 @@ html, body {
   height: 100%;
 }
 
-.circle {
-  position: absolute;
-  width: 85px;
-  height: 85px;
-  background: #f2f2f2;
-  border-radius: 50%;
-  transform: translate(-50%, -50%);
-}
-
-/* Custom cursor dot */
-.cursor-dot {
+/* Experiment hint */
+.experiment-hint {
   position: fixed;
-  width: 18px;
-  height: 18px;
-  border-radius: 50%;
-  background: rgba(255, 255, 255, 0.9);
-  transform: translate(-50%, -50%);
+  top: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+
+  font-size: 14px;
+  opacity: 0.6;
   pointer-events: none;
-  z-index: 9999;
-  transition:
-    width 380ms ease,
-    height 380ms ease,
-    opacity 250ms ease,
-    background-color 200ms ease;
-    opacity: 1;
-    mix-blend-mode: difference;
-}
+  user-select: none;
 
-.cursor-dot.cursor-active {
-  width: 38px;
-  height: 38px;
-  background-color: rgba(255, 255, 255, 0.7);
-}
-
-.cursor-hover {
-  background: rgba(255, 255, 255, 0.6);
+  transition: opacity 600ms ease;
 }
 
 /* Mobile users notice */
@@ -150,6 +149,20 @@ html, body {
   transition: opacity 200ms ease;
 }
 
+@media (max-width: 768px) {
+  .cursor-dot{
+    display: none !important;
+  }
+
+  html,
+  body {
+    cursor: auto;
+  }
+
+  body{
+    font-size: 15px;
+  }
+    
   .overlay.active .experiment-content {
     display: none;
   }
@@ -167,10 +180,4 @@ html, body {
   }
   
 }
-
-@media (max-width: 768px) {
-  .cursor-dot{
-    display: none !important;
-  }
-
 
