@@ -4,6 +4,10 @@ const isMobile = window.matchMedia("(max-width: 768px)").matches;
 const cursorDot = document.querySelector(".cursor-dot");
 const transition = document.querySelector(".page-transition");
 
+//Turn of right click menu
+document.addEventListener("contextmenu", (e) => {
+  e.preventDefault();
+});
 
 // --------------------
 // Cursor logic (simple, consistent)
