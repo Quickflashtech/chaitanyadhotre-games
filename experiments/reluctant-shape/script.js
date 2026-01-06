@@ -2,9 +2,12 @@ const circle = document.querySelector(".reluctant-circle");
 const stage = document.querySelector(".reluctant-stage");
 const closeBtn = document.querySelector(".overlay-close");
 
-closeBtn.addEventListener("click", () => {
-  window.history.back();
-});
+// ---------- Close logic ----------
+if (closeBtn) {
+  closeBtn.addEventListener("click", () => {
+    window.history.back();
+  });
+}
 
 window.addEventListener("keydown", (e) => {
   if (e.key === "Escape") {
@@ -12,24 +15,18 @@ window.addEventListener("keydown", (e) => {
   }
 });
 
-let mouseX = homeX;
-let mouseY = homeY;
-
+// ---------- State ----------
 let stageRect;
-let homeX, homeY;
-let currentX, currentY;
-let targetX, targetY;
+let homeX = 0;
+let homeY = 0;
 
-function measureStage() {
-  stageRect = stage.getBoundingClientRect();
-  homeX = stageRect.width / 2;
-  homeY = stageRect.height / 2;
+let currentX = 0;
+let currentY = 0;
+let targetX = 0;
+let targetY = 0;
 
-  currentX = homeX;
-  currentY = homeY;
-  targetX = homeX;
-  targetY = homeY;
-}
+let mouseX = 0;
+let mouseY = 0;
 
 const AWARE_RADIUS = 140;
 const MAX_PUSH = 32;
@@ -38,12 +35,30 @@ const EASE = 0.08;
 
 let reactTimeout = null;
 
-// position helper
-function applyPosition() {
-  circle.style.transform = `translate(${currentX}px, ${currentY}px) translate(-50%, -50%)`;
+// ---------- Measure ----------
+function measureStage() {
+  if (!stage) return;
+
+  stageRect = stage.getBoundingClientRect();
+
+  homeX = stageRect.width / 2;
+  homeY = stageRect.height / 2;
+
+  currentX = homeX;
+  currentY = homeY;
+  targetX = homeX;
+  targetY = homeY;
+
+  applyPosition();
 }
 
-// mouse tracking
+// ---------- Position ----------
+function applyPosition() {
+  circle.style.transform =
+    `translate(${currentX}px, ${currentY}px) translate(-50%, -50%)`;
+}
+
+// ---------- Mouse ----------
 stage.addEventListener("mousemove", (e) => {
   mouseX = e.clientX - stageRect.left;
   mouseY = e.clientY - stageRect.top;
@@ -67,14 +82,13 @@ stage.addEventListener("mousemove", (e) => {
   }
 });
 
-
-// return home when leaving
+// ---------- Leave ----------
 stage.addEventListener("mouseleave", () => {
   targetX = homeX;
   targetY = homeY;
 });
 
-// animation loop
+// ---------- Animate ----------
 function animate() {
   currentX += (targetX - currentX) * EASE;
   currentY += (targetY - currentY) * EASE;
@@ -83,13 +97,8 @@ function animate() {
   requestAnimationFrame(animate);
 }
 
+// ---------- Init ----------
 measureStage();
-
 animate();
 
-// handle resize
 window.addEventListener("resize", measureStage);
-  stageRect = stage.getBoundingClientRect();
-  homeX = stageRect.width / 2;
-  homeY = stageRect.height / 2;
-});
