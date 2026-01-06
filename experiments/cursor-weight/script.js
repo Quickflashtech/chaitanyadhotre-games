@@ -91,10 +91,32 @@ const cursorDot = document.querySelector(".cursor-dot");
 const EDGE = 20;
 
 if (!isMobile) {
-  document.addEventListener("mousemove", (e) => {
-    ...
-  });
+document.addEventListener("mousemove", (e) => {
+  const x = e.clientX;
+  const y = e.clientY;
+
+  // cursor dot
+  cursorDot.style.left = `${x}px`;
+  cursorDot.style.top = `${y}px`;
+
+  // weight target
+  targetX = x;
+  targetY = y;
+
+  const vw = window.innerWidth;
+  const vh = window.innerHeight;
+  const EDGE = 20;
+
+  const nearEdge =
+    x < EDGE ||
+    x > vw - EDGE ||
+    y < EDGE ||
+    y > vh - EDGE;
+
+  cursorDot.style.opacity = nearEdge ? "0" : "1";
+});
 }
+
 
 // Weight physics
 const weightCircle = document.querySelector(".circle");
