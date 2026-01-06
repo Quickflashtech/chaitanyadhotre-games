@@ -2,6 +2,15 @@
    Overlay base (experiment)
    ========================= */
 
+.overlay,
+.overlay-content {
+  pointer-events: auto;
+}
+
+.overlay-close {
+  pointer-events: auto;
+}
+
 .overlay {
   position: fixed;
   inset: 0;
@@ -56,6 +65,25 @@
 
   transform: translate(-50%, -50%);
   pointer-events: none;
+}
+
+/* Experiment hint */
+.experiment-hint {
+  position: fixed;
+  top: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+
+  font-size: 14px;
+  line-height: 1.5;
+  opacity: 0.6;
+
+  color: #f5f5f5;
+  pointer-events: none;
+  user-select: none;
+
+  transition: opacity 600ms ease;
+  z-index: 1100;
 }
 
 /* Mobile users notice */
