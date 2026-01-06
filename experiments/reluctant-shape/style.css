@@ -40,15 +40,14 @@
 
 /* Experiment object */
 .reluctant-stage {
-  position: absolute;
+  position: fixed;
   inset: 0;
 }
-
-
+ 
 .reluctant-circle {
   position: absolute;
-  left: 50%;
-  top: 50%;
+  left: 0;
+  top: 0;
 
   width: 96px;
   height: 96px;
@@ -56,6 +55,6 @@
   border-radius: 50%;
   background: #f2f2f2;
 
-  transform: translate(-50%, -50%);
   pointer-events: none;
 }
+
