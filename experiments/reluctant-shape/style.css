@@ -6,14 +6,15 @@
 
 .reluctant-circle {
   position: absolute;
-  width: 80px;
-  height: 80px;
+  left: 50%;
+  top: 50%;
+
+  width: 96px;
+  height: 96px;
+
   border-radius: 50%;
   background: #f2f2f2;
 
-  left: 50%;
-  top: 50%;
   transform: translate(-50%, -50%);
-
-  transition: none;
+  pointer-events: none;
 }
