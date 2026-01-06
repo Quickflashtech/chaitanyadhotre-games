@@ -69,8 +69,20 @@ body {
   margin-top: 100px;
 }
 
+/* experiments index */
+.index-col {
+  display: flex;
+  align-items: flex-start;
+}
+
+.index {
+  opacity: 0.35;
+  line-height: 1.1;
+  transition: opacity 300ms ease;
+}
+
 .experiment-item {
-  display: inline-flex;
+  display: flex;
   align-items: flex-start;
   gap: 24px;
 
@@ -89,6 +101,7 @@ body {
 
   transition: transform 300ms ease, opacity 300ms ease;
 }
+
 
 .experiment-item .index {
   line-height: 1.1;
@@ -123,10 +136,13 @@ body {
 .experiment-text .meta {
   margin-top: 6px;
   font-size: 13px;
+
   opacity: 0;
   max-height: 0;
   overflow: hidden;
+
   transform: translateY(-2px);
+
   transition:
     opacity 240ms ease,
     transform 240ms ease,
@@ -143,6 +159,7 @@ body {
 
 
 
+
 /* =========================
    Custom cursor
    ========================= */
@@ -154,7 +171,7 @@ body {
   background: rgba(255, 255, 255, 0.9);
   transform: translate(-50%, -50%);
   pointer-events: none;
-  z-index: 9999;
+  z-: 9999;
   transition:
     width 380ms ease,
     height 380ms ease,
