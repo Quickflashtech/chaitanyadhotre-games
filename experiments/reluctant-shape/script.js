@@ -66,12 +66,24 @@ function animate() {
     }
   }
 
-  // Idle drift
-  if (mouseX === null) {
-    idleTime += IDLE_SPEED;
-    vx += Math.sin(idleTime * 1.3) * IDLE_FORCE;
-    vy += Math.cos(idleTime * 1.1) * IDLE_FORCE;
+// Idle drift (when cursor influence is weak)
+let idleAllowed = true;
+
+if (mouseX !== null) {
+  const dx = x - mouseX;
+  const dy = y - mouseY;
+  const dist = Math.hypot(dx, dy);
+
+  if (dist < REPULSE_RADIUS * 1.2) {
+    idleAllowed = false;
   }
+}
+
+if (idleAllowed) {
+  idleTime += IDLE_SPEED;
+  vx += Math.sin(idleTime * 1.3) * IDLE_FORCE;
+  vy += Math.cos(idleTime * 1.1) * IDLE_FORCE;
+}
 
   // Edge correction
   const cx = window.innerWidth / 2;
