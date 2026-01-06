@@ -1,104 +1,71 @@
 const circle = document.querySelector(".reluctant-circle");
 const stage = document.querySelector(".reluctant-stage");
-const closeBtn = document.querySelector(".overlay-close");
 
-// ---------- Close logic ----------
-if (closeBtn) {
-  closeBtn.addEventListener("click", () => {
-    window.history.back();
-  });
-}
+let x = window.innerWidth / 2;
+let y = window.innerHeight / 2;
 
-window.addEventListener("keydown", (e) => {
-  if (e.key === "Escape") {
-    window.history.back();
-  }
-});
+let vx = 0;
+let vy = 0;
 
-// ---------- State ----------
-let stageRect;
-let homeX = 0;
-let homeY = 0;
+const REPULSE_RADIUS = 160;
+const REPULSE_STRENGTH = 0.35;
 
-let currentX = 0;
-let currentY = 0;
-let targetX = 0;
-let targetY = 0;
+const EDGE_PADDING = 120;
+const EDGE_FORCE = 0.015;
 
-let mouseX = 0;
-let mouseY = 0;
+const FRICTION = 0.92;
 
-const AWARE_RADIUS = 140;
-const MAX_PUSH = 32;
-const DELAY = 140;
-const EASE = 0.08;
+let mouseX = null;
+let mouseY = null;
 
-let reactTimeout = null;
-
-// ---------- Measure ----------
-function measureStage() {
-  if (!stage) return;
-
-  stageRect = stage.getBoundingClientRect();
-
-  homeX = stageRect.width / 2;
-  homeY = stageRect.height / 2;
-
-  currentX = homeX;
-  currentY = homeY;
-  targetX = homeX;
-  targetY = homeY;
-
-  applyPosition();
-}
-
-// ---------- Position ----------
-function applyPosition() {
-  circle.style.transform =
-    `translate(${currentX}px, ${currentY}px) translate(-50%, -50%)`;
-}
-
-// ---------- Mouse ----------
+// Track mouse
 stage.addEventListener("mousemove", (e) => {
-  mouseX = e.clientX - stageRect.left;
-  mouseY = e.clientY - stageRect.top;
-
-  const dx = mouseX - currentX;
-  const dy = mouseY - currentY;
-  const distance = Math.hypot(dx, dy);
-
-  if (distance < AWARE_RADIUS && !reactTimeout) {
-    reactTimeout = setTimeout(() => {
-      const strength = (AWARE_RADIUS - distance) / AWARE_RADIUS;
-      const push = Math.min(strength * MAX_PUSH, MAX_PUSH);
-
-      const angle = Math.atan2(dy, dx);
-
-      targetX = homeX - Math.cos(angle) * push;
-      targetY = homeY - Math.sin(angle) * push;
-
-      reactTimeout = null;
-    }, DELAY);
-  }
+  mouseX = e.clientX;
+  mouseY = e.clientY;
 });
 
-// ---------- Leave ----------
 stage.addEventListener("mouseleave", () => {
-  targetX = homeX;
-  targetY = homeY;
+  mouseX = null;
+  mouseY = null;
 });
 
-// ---------- Animate ----------
 function animate() {
-  currentX += (targetX - currentX) * EASE;
-  currentY += (targetY - currentY) * EASE;
+  // Cursor repulsion
+  if (mouseX !== null) {
+    const dx = x - mouseX;
+    const dy = y - mouseY;
+    const dist = Math.hypot(dx, dy);
 
-  applyPosition();
+    if (dist < REPULSE_RADIUS && dist > 0.001) {
+      const force = (REPULSE_RADIUS - dist) / REPULSE_RADIUS;
+      vx += (dx / dist) * force * REPULSE_STRENGTH;
+      vy += (dy / dist) * force * REPULSE_STRENGTH;
+    }
+  }
+
+  // Edge correction (push back toward center)
+  const cx = window.innerWidth / 2;
+  const cy = window.innerHeight / 2;
+
+  if (x < EDGE_PADDING) vx += (cx - x) * EDGE_FORCE;
+  if (x > window.innerWidth - EDGE_PADDING) vx += (cx - x) * EDGE_FORCE;
+
+  if (y < EDGE_PADDING) vy += (cy - y) * EDGE_FORCE;
+  if (y > window.innerHeight - EDGE_PADDING) vy += (cy - y) * EDGE_FORCE;
+
+  // Apply velocity
+  x += vx;
+  y += vy;
+
+  // Friction
+  vx *= FRICTION;
+  vy *= FRICTION;
+
+  // Render
+  circle.style.transform =
+    `translate(${x}px, ${y}px) translate(-50%, -50%)`;
+
   requestAnimationFrame(animate);
 }
 
-// ---------- Init ----------
-measureStage();
 animate();
-
-window.addEventListener("resize", measureStage);
