@@ -91,16 +91,14 @@ function animate() {
 
   // Gentle center bias
   // Soft territory (only when drifting too far)
-  const cx = window.innerWidth / 2;
-  const cy = window.innerHeight / 2;
+// Soft territory (only when drifting too far)
+const dxCenter = x - cx;
+const dyCenter = y - cy;
+const distFromCenter = Math.hypot(dxCenter, dyCenter);
 
-  const dxCenter = x - cx;
-  const dyCenter = y - cy;
-  const distFromCenter = Math.hypot(dxCenter, dyCenter);
+const TERRITORY_RADIUS = 260;
 
-  const TERRITORY_RADIUS = 260;
-
-  if (distFromCenter > TERRITORY_RADIUS) {
+if (distFromCenter > TERRITORY_RADIUS) {
   const excess = distFromCenter - TERRITORY_RADIUS;
   const pull = excess * 0.00006;
 
