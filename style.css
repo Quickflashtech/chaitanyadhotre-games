@@ -71,7 +71,7 @@ body {
 
 .experiment-item {
   display: inline-flex;
-  align-items: center;
+  align-items: flex-start;
   gap: 24px;
 
   background: none;
@@ -91,6 +91,7 @@ body {
 }
 
 .experiment-item .index {
+  line-height: 1.1;
   opacity: 0.35;
   transition: opacity 300ms ease, transform 300ms ease;
 }
@@ -123,15 +124,23 @@ body {
   margin-top: 6px;
   font-size: 13px;
   opacity: 0;
-  transform: translateY(4px);
-  transition: opacity 240ms ease, transform 240ms ease;
+  max-height: 0;
+  overflow: hidden;
+  transform: translateY(-2px);
+  transition:
+    opacity 240ms ease,
+    transform 240ms ease,
+    max-height 240ms ease;
 }
+
 
 /* experiment hover meta text */
 .experiment-item:hover .meta {
   opacity: 0.5;
+  max-height: 40px;
   transform: translateY(0);
 }
+
 
 
 /* =========================
