@@ -283,7 +283,7 @@ body {
 .page-content {
   opacity: 0;
   transform: translateY(6px);
-  transition: opacity 600ms ease, transform 600ms ease;
+  transition: opacity 450ms ease, transform 450ms ease;
 }
 
 .page-content.is-visible {
