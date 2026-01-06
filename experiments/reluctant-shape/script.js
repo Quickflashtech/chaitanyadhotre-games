@@ -1,6 +1,9 @@
 const circle = document.querySelector(".reluctant-circle");
 const stage = document.querySelector(".reluctant-stage");
 
+let mouseX = homeX;
+let mouseY = homeY;
+
 let stageRect;
 let homeX, homeY;
 let currentX, currentY;
@@ -31,16 +34,14 @@ function applyPosition() {
 
 // mouse tracking
 stage.addEventListener("mousemove", (e) => {
-  const x = e.clientX - stageRect.left;
-  const y = e.clientY - stageRect.top;
+  mouseX = e.clientX - stageRect.left;
+  mouseY = e.clientY - stageRect.top;
 
-  const dx = x - currentX;
-  const dy = y - currentY;
+  const dx = mouseX - currentX;
+  const dy = mouseY - currentY;
   const distance = Math.hypot(dx, dy);
 
-  if (distance < AWARE_RADIUS) {
-    if (reactTimeout) return;
-
+  if (distance < AWARE_RADIUS && !reactTimeout) {
     reactTimeout = setTimeout(() => {
       const strength = (AWARE_RADIUS - distance) / AWARE_RADIUS;
       const push = Math.min(strength * MAX_PUSH, MAX_PUSH);
@@ -54,6 +55,7 @@ stage.addEventListener("mousemove", (e) => {
     }, DELAY);
   }
 });
+
 
 // return home when leaving
 stage.addEventListener("mouseleave", () => {
