@@ -13,9 +13,51 @@ let hintTimeout = null;
 let hintElement = null;
 let idleTime = 0;
 
-// Overlay hint
-function showExperimentHint() { ... }
-function removeExperimentHint() { ... }
+//Show Overlay hint
+function showExperimentHint() {
+  // Clean up if something already exists
+  if (hintElement) {
+    hintElement.remove();
+    hintElement = null;
+  }
+  if (hintTimeout) {
+    clearTimeout(hintTimeout);
+    hintTimeout = null;
+  }
+
+  hintElement = document.createElement("div");
+  hintElement.className = "experiment-hint";
+  hintElement.textContent =
+    "Move your cursor. Notice how mass responds.";
+
+  overlay.appendChild(hintElement);
+
+  hintTimeout = setTimeout(() => {
+    if (!hintElement) return;
+
+    hintElement.style.opacity = "0";
+
+    setTimeout(() => {
+      if (hintElement) {
+        hintElement.remove();
+        hintElement = null;
+      }
+    }, 600);
+  }, 6000);
+}
+
+//Overlay hint goes away
+function removeExperimentHint() {
+  if (hintTimeout) {
+    clearTimeout(hintTimeout);
+    hintTimeout = null;
+  }
+
+  if (hintElement) {
+    hintElement.remove();
+    hintElement = null;
+  }
+}
 
 //Overlay open and close logic
 function openOverlay() {
@@ -70,9 +112,63 @@ const BASE_SCALE = 1;
 const MIN_SCALE = 0.92;
 const SCALE_EASING = 0.12;
 
-function animateWeight() { ... }
+function animateWeight() {
+let adjustedTargetX = targetX;
+let adjustedTargetY = targetY;
 
-animateWeight();
+if (closeButton) {
+  const rect = closeButton.getBoundingClientRect();
+  const cx = rect.left + rect.width / 2;
+  const cy = rect.top + rect.height / 2;
+
+  const dx = targetX - cx;
+  const dy = targetY - cy;
+  const distance = Math.sqrt(dx * dx + dy * dy);
+
+  const AVOID_RADIUS = 100;   // how close before repulsion
+  const PUSH_STRENGTH = 50;  // how strongly it moves away
+
+  if (distance < AVOID_RADIUS && distance > 0.001) {
+    const force = (AVOID_RADIUS - distance) / AVOID_RADIUS;
+    adjustedTargetX += (dx / distance) * force * PUSH_STRENGTH;
+    adjustedTargetY += (dy / distance) * force * PUSH_STRENGTH;
+  }
+}
+
+  if (isMobile) {
+  idleTime += 0.01;
+
+  adjustedTargetX =
+    window.innerWidth / 2 + Math.sin(idleTime) * 40;
+
+  adjustedTargetY =
+    window.innerHeight / 2 + Math.cos(idleTime * 0.8) * 30;
+}
+
+currentX += (adjustedTargetX - currentX) * EASING;
+currentY += (adjustedTargetY - currentY) * EASING;
+
+    const dx = targetX - currentX;
+  const dy = targetY - currentY;
+  const speed = Math.sqrt(dx * dx + dy * dy);
+
+// Map speed to scale (clamped)
+  const speedFactor = Math.min(speed / 120, 1); // 0 → 1
+  const targetScale =
+  BASE_SCALE - speedFactor * (BASE_SCALE - MIN_SCALE);
+
+// Smooth scale toward target
+  currentScale += (targetScale - currentScale) * SCALE_EASING;
+
+  weightCircle.style.left = `${currentX}px`;
+  weightCircle.style.top = `${currentY}px`;
+  weightCircle.style.transform = `translate(-50%, -50%) scale(${currentScale})`;
+
+  requestAnimationFrame(animateWeight);
+}
+
+  animateWeight();
+
 
 // Button hover logic
 const hoverTargets = document.querySelectorAll("button");
