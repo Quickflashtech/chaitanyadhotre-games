@@ -258,6 +258,22 @@ body {
   transition: opacity 200ms ease;
 }
 
+/* Transition page */
+.page-transition {
+  position: fixed;
+  inset: 0;
+  background: #0b0b0b;
+  z-index: 99999;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 280ms ease;
+}
+
+.page-transition.active {
+  opacity: 1;
+}
+
+
 
 @media (max-width: 768px) {
   .cursor-dot{
