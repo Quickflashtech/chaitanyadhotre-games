@@ -3,6 +3,34 @@ const closeBtn = document.querySelector(".overlay-close");
 const overlayBg = document.querySelector(".overlay-bg");
 const closeButton = document.querySelector(".overlay-close");
 const isMobile = window.matchMedia("(max-width: 768px)").matches;
+const transition = document.querySelector(".page-transition");
+
+// exit transition
+function exitExperiment() {
+  if (!transition) {
+    window.location.href = "../../index.html";
+    return;
+  }
+
+  transition.classList.add("active");
+
+  setTimeout(() => {
+    window.location.href = "../../index.html";
+  }, 280);
+}
+
+// Exit handling
+if (closeBtn) {
+  closeBtn.addEventListener("click", exitExperiment);
+}
+
+window.addEventListener("keydown", (e) => {
+  if (e.key === "Escape") {
+    exitExperiment();
+  }
+});
+
+
 
 if (isMobile) {
   document.body.style.cursor = "auto";
@@ -66,25 +94,15 @@ function openOverlay() {
   showExperimentHint();
 }
 
-function closeOverlay() {
-  overlay.classList.remove("active");
-  document.body.style.overflow = "";
-  removeExperimentHint();
-}
 
-//Overlay close handling
-closeBtn.addEventListener("click", closeOverlay);
-overlay.addEventListener("click", closeOverlay);
+
 
 const overlayContent = document.querySelector(".overlay-content");
 overlayContent.addEventListener("click", (e) => {
   e.stopPropagation();
 });
 
-window.addEventListener("keydown", (e) => {
-  if (e.key === "Escape") closeOverlay();
-  removeExperimentHint();
-});
+
 
 // Cursor dot logic
 const cursorDot = document.querySelector(".cursor-dot");
