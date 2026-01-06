@@ -275,6 +275,18 @@ body {
   opacity: 1;
 }
 
+/* Home page fade in */
+.page-content {
+  opacity: 0;
+  transform: translateY(6px);
+  transition: opacity 600ms ease, transform 600ms ease;
+}
+
+.page-content.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
 
 
 @media (max-width: 768px) {
