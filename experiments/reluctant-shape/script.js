@@ -1,15 +1,11 @@
 const circle = document.querySelector(".reluctant-circle");
 const stage = document.querySelector(".reluctant-stage");
+const closeBtn = document.querySelector(".overlay-close");
+
+// ---- constants ----
 const IDLE_FORCE = 0.006;
 const IDLE_SPEED = 0.0008;
 const FRICTION = 0.965;
-
-let idleTime = Math.random() * 1000;
-let x = window.innerWidth / 2;
-let y = window.innerHeight / 2;
-
-let vx = 0;
-let vy = 0;
 
 const REPULSE_RADIUS = 160;
 const REPULSE_STRENGTH = 0.35;
@@ -17,22 +13,45 @@ const REPULSE_STRENGTH = 0.35;
 const EDGE_PADDING = 120;
 const EDGE_FORCE = 0.006;
 
-const FRICTION = 0.92;
+// ---- state ----
+let idleTime = Math.random() * 1000;
+
+let x = window.innerWidth / 2;
+let y = window.innerHeight / 2;
+
+let vx = 0;
+let vy = 0;
 
 let mouseX = null;
 let mouseY = null;
 
-// Track mouse
-stage.addEventListener("mousemove", (e) => {
-  mouseX = e.clientX;
-  mouseY = e.clientY;
+// ---- close logic ----
+if (closeBtn) {
+  closeBtn.addEventListener("click", () => {
+    window.history.back();
+  });
+}
+
+window.addEventListener("keydown", (e) => {
+  if (e.key === "Escape") {
+    window.history.back();
+  }
 });
 
-stage.addEventListener("mouseleave", () => {
-  mouseX = null;
-  mouseY = null;
-});
+// ---- mouse tracking ----
+if (stage) {
+  stage.addEventListener("mousemove", (e) => {
+    mouseX = e.clientX;
+    mouseY = e.clientY;
+  });
 
+  stage.addEventListener("mouseleave", () => {
+    mouseX = null;
+    mouseY = null;
+  });
+}
+
+// ---- animation ----
 function animate() {
   // Cursor repulsion
   if (mouseX !== null) {
@@ -47,14 +66,14 @@ function animate() {
     }
   }
 
-  // Idle drift (only when no mouse)
+  // Idle drift
   if (mouseX === null) {
     idleTime += IDLE_SPEED;
     vx += Math.sin(idleTime * 1.3) * IDLE_FORCE;
     vy += Math.cos(idleTime * 1.1) * IDLE_FORCE;
   }
 
-  // Edge correction (push back toward center)
+  // Edge correction
   const cx = window.innerWidth / 2;
   const cy = window.innerHeight / 2;
 
@@ -64,7 +83,7 @@ function animate() {
   if (y < EDGE_PADDING) vy += (cy - y) * EDGE_FORCE;
   if (y > window.innerHeight - EDGE_PADDING) vy += (cy - y) * EDGE_FORCE;
 
-  // Apply velocity
+  // Integrate
   x += vx;
   y += vy;
 
