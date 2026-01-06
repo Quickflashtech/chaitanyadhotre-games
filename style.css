@@ -76,14 +76,19 @@ body {
 }
 
 .index {
-  position: relative;
-  display: inline-flex;
-  align-items: flex-start;
-
+  display: inline-block;
   line-height: 1.1;
+
   opacity: 0.35;
-  transition: opacity 300ms ease;
+
+  transform: scaleY(1);
+  transform-origin: top;
+
+  transition:
+    opacity 300ms ease,
+    transform 260ms ease;
 }
+
 
 .index::after {
   content: "";
@@ -136,9 +141,10 @@ body {
 
 .experiment-item:hover .index {
   opacity: 0.75;
-  transform: scaleY(1.4);
-  transform-origin: top;
+  transform: scaleY(1.55);
+  letter-spacing: 0.02em;
 }
+
 
 .experiment-item:hover .index::after {
   height: 28px; /* matches title + meta spacing */
