@@ -1,5 +1,16 @@
 const circle = document.querySelector(".reluctant-circle");
 const stage = document.querySelector(".reluctant-stage");
+const closeBtn = document.querySelector(".overlay-close");
+
+closeBtn.addEventListener("click", () => {
+  window.history.back();
+});
+
+window.addEventListener("keydown", (e) => {
+  if (e.key === "Escape") {
+    window.history.back();
+  }
+});
 
 let mouseX = homeX;
 let mouseY = homeY;
