@@ -136,7 +136,8 @@ body {
 
 .experiment-item:hover .index {
   opacity: 0.75;
-  transform: translateX(-4px);
+  transform: scaleY(1.4);
+  transform-origin: top;
 }
 
 .experiment-item:hover .index::after {
