@@ -75,10 +75,13 @@ body {
   border: none;
   color: inherit;
   font: inherit;
-  display: flex;
+  display: inline-flex;
+  width: fit-content;
   gap: 24px;
   font-size: 28px;
+  padding-right: 10px:
   padding: 0;
+  text-decoration: none;
 }
 
 .experiment-item:focus {
@@ -87,8 +90,7 @@ body {
 
 .experiment-item:focus-visible {
   outline: none;
-  text-decoration: underline;
-  text-decoration-thickness: 2px;
+  opacity: 0.85;
 }
 
 .experiment-item {
