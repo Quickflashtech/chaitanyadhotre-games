@@ -1,3 +1,48 @@
+/* =========================
+   Overlay base (experiment)
+   ========================= */
+
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.85);
+  z-index: 1000;
+}
+
+.overlay-content {
+  position: absolute;
+  inset: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.overlay-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.overlay-close {
+  position: absolute;
+  top: 32px;
+  right: 40px;
+
+  background: none;
+  border: none;
+  color: #f5f5f5;
+
+  font-size: 28px;
+  opacity: 0.6;
+}
+
+.overlay-close:hover {
+  opacity: 1;
+}
+
+
+/* Experiment object */
 .reluctant-stage {
   position: relative;
   width: 100%;
