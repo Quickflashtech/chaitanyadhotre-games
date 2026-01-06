@@ -90,8 +90,23 @@ function animate() {
   }
 
   // Gentle center bias
-  vx += (window.innerWidth / 2 - x) * 0.00002;
-  vy += (window.innerHeight / 2 - y) * 0.00002;
+  // Soft territory (only when drifting too far)
+  const cx = window.innerWidth / 2;
+  const cy = window.innerHeight / 2;
+
+  const dxCenter = x - cx;
+  const dyCenter = y - cy;
+  const distFromCenter = Math.hypot(dxCenter, dyCenter);
+
+  const TERRITORY_RADIUS = 260;
+
+  if (distFromCenter > TERRITORY_RADIUS) {
+  const excess = distFromCenter - TERRITORY_RADIUS;
+  const pull = excess * 0.00006;
+
+  vx -= (dxCenter / distFromCenter) * pull;
+  vy -= (dyCenter / distFromCenter) * pull;
+}
 
   // Edge correction
   const cx = window.innerWidth / 2;
