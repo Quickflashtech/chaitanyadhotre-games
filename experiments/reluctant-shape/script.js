@@ -1,6 +1,9 @@
 const circle = document.querySelector(".reluctant-circle");
 const stage = document.querySelector(".reluctant-stage");
+const IDLE_FORCE = 0.004;     // extremely subtle
+const IDLE_SPEED = 0.0006;   // how fast direction changes
 
+let idleTime = Math.random() * 1000;
 let x = window.innerWidth / 2;
 let y = window.innerHeight / 2;
 
@@ -40,6 +43,13 @@ function animate() {
       const force = (REPULSE_RADIUS - dist) / REPULSE_RADIUS;
       vx += (dx / dist) * force * REPULSE_STRENGTH;
       vy += (dy / dist) * force * REPULSE_STRENGTH;
+    }
+    // Idle drift (only when no mouse influence)
+  if (mouseX === null) {
+    idleTime += IDLE_SPEED;
+
+    vx += Math.sin(idleTime * 1.3) * IDLE_FORCE;
+    vy += Math.cos(idleTime * 1.1) * IDLE_FORCE;
     }
   }
 
