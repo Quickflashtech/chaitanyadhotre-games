@@ -72,12 +72,13 @@ body {
 /* experiments index */
 .index-col {
   display: flex;
-  align-items: flex-start;
+  align-self: stretch;
 }
 
 .index {
   opacity: 0.35;
   line-height: 1.1;
+  align-self: flex-start;
   transition: opacity 300ms ease;
 }
 
@@ -171,14 +172,15 @@ body {
   background: rgba(255, 255, 255, 0.9);
   transform: translate(-50%, -50%);
   pointer-events: none;
-  z-: 9999;
+  z-index: 9999;
+  opacity: 1;
+  mix-blend-mode: difference;
   transition:
     width 380ms ease,
     height 380ms ease,
     opacity 250ms ease,
     background-color 200ms ease;
-    opacity: 1;
-    mix-blend-mode: difference;
+
 }
 
 .cursor-dot.cursor-active {
