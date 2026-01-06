@@ -14,14 +14,39 @@
 .overlay {
   position: fixed;
   inset: 0;
-  background: rgba(0, 0, 0, 0.85);
   z-index: 1000;
+  pointer-events: none;
+}
+
+.overlay-bg {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.75);
+  opacity: 0;
+  transition: opacity 400ms ease;
 }
 
 .overlay-content {
-  position: fixed;
+  position: absolute;
   inset: 0;
-  display: block; /* ❗ NOT flex */
+  opacity: 0;
+  transform: scale(0.96);
+  transition: opacity 400ms ease, transform 400ms ease;
+  pointer-events: none;
+}
+
+.overlay.active {
+  pointer-events: auto;
+}
+
+.overlay.active .overlay-bg {
+  opacity: 1;
+}
+
+.overlay.active .overlay-content {
+  opacity: 1;
+  transform: scale(1);
+  pointer-events: auto;
 }
 
 .overlay-inner {
