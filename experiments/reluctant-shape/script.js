@@ -1,16 +1,21 @@
 const circle = document.querySelector(".reluctant-circle");
 const stage = document.querySelector(".reluctant-stage");
 
-let stageRect = stage.getBoundingClientRect();
+let stageRect;
+let homeX, homeY;
+let currentX, currentY;
+let targetX, targetY;
 
-let homeX = stageRect.width / 2;
-let homeY = stageRect.height / 2;
+function measureStage() {
+  stageRect = stage.getBoundingClientRect();
+  homeX = stageRect.width / 2;
+  homeY = stageRect.height / 2;
 
-let currentX = homeX;
-let currentY = homeY;
-
-let targetX = homeX;
-let targetY = homeY;
+  currentX = homeX;
+  currentY = homeY;
+  targetX = homeX;
+  targetY = homeY;
+}
 
 const AWARE_RADIUS = 140;
 const MAX_PUSH = 32;
@@ -65,10 +70,12 @@ function animate() {
   requestAnimationFrame(animate);
 }
 
+measureStage();
+
 animate();
 
 // handle resize
-window.addEventListener("resize", () => {
+window.addEventListener("resize", measureStage);
   stageRect = stage.getBoundingClientRect();
   homeX = stageRect.width / 2;
   homeY = stageRect.height / 2;
