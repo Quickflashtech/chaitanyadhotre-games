@@ -76,11 +76,31 @@ body {
 }
 
 .index {
-  opacity: 0.35;
+  position: relative;
+  display: inline-flex;
+  align-items: flex-start;
+
   line-height: 1.1;
-  align-self: flex-start;
+  opacity: 0.35;
   transition: opacity 300ms ease;
 }
+
+.index::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 100%;
+
+  width: 1px;
+  height: 0;
+
+  background: currentColor;
+  opacity: 0.25;
+
+  transform: translateX(-50%);
+  transition: height 240ms ease;
+}
+
 
 .experiment-item {
   display: flex;
@@ -118,6 +138,11 @@ body {
   opacity: 0.75;
   transform: translateX(-4px);
 }
+
+.experiment-item:hover .index::after {
+  height: 28px; /* matches title + meta spacing */
+}
+
 
 .experiment-item:focus,
 .experiment-item:focus-visible {
