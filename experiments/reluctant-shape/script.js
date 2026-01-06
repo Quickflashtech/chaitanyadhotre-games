@@ -1,7 +1,8 @@
 const circle = document.querySelector(".reluctant-circle");
 const stage = document.querySelector(".reluctant-stage");
-const IDLE_FORCE = 0.004;     // extremely subtle
-const IDLE_SPEED = 0.0006;   // how fast direction changes
+const IDLE_FORCE = 0.006;
+const IDLE_SPEED = 0.0008;
+const FRICTION = 0.965;
 
 let idleTime = Math.random() * 1000;
 let x = window.innerWidth / 2;
@@ -14,7 +15,7 @@ const REPULSE_RADIUS = 160;
 const REPULSE_STRENGTH = 0.35;
 
 const EDGE_PADDING = 120;
-const EDGE_FORCE = 0.015;
+const EDGE_FORCE = 0.006;
 
 const FRICTION = 0.92;
 
