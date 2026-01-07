@@ -4,13 +4,14 @@ const closeBtn = document.querySelector(".overlay-close");
 const pageTransition = document.querySelector(".page-transition");
 
 // Fade IN on load
-if (pageTransition) {
-  pageTransition.classList.add("active");
-
-  requestAnimationFrame(() => {
-    pageTransition.classList.remove("active");
-  });
-}
+window.addEventListener("load", () => {
+  const content = document.querySelector(".page-content");
+  if (content) {
+    requestAnimationFrame(() => {
+      content.classList.add("is-visible");
+    });
+  }
+});
 
 // ---- constants ----
 const IDLE_FORCE = 0.006;
