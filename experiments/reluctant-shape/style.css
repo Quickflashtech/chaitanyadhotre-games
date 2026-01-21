@@ -119,35 +119,39 @@
   font-size: 14px;
   line-height: 1.5;
   opacity: 0.6;
-
   color: #f5f5f5;
   pointer-events: none;
   user-select: none;
+  z-index: 1100; /* Ensure it's above all other content */
 
   transition: opacity 600ms ease;
-  z-index: 1100;
 }
 
 /* Mobile users notice */
 .mobile-notice {
   display: none;
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 32px;
-  padding: 0 24px;
-  text-align: center;
-  font-size: 13px;
-  line-height: 1.6;
-  opacity: 0.65;
-  pointer-events: none;
-  user-select: none;
-  z-index: 1200; /* Ensure it's above the overlay-content */
 }
 
 @media (max-width: 768px) {
   .overlay.active .mobile-notice {
-    display: block;
+    display: block;  /* Make sure mobile notice is shown */
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 32px;
+    padding: 0 24px;
+    text-align: center;
+    font-size: 13px;
+    line-height: 1.6;
+    opacity: 0.65;
+    pointer-events: none;
+    user-select: none;
+  }
+  
+  /* Ensure the experiment hint is also visible on mobile */
+  .experiment-hint {
+    font-size: 16px; /* Adjust font size for mobile */
+    opacity: 1; /* Ensure it's fully visible */
   }
 }
 
