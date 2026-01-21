@@ -9,30 +9,23 @@
 </head>
 <body>
 
-<div class="overlay" aria-hidden="true">
-  <div class="overlay-bg"></div>
+  <div class="overlay active">
+    <div class="overlay-bg"></div>
+    <div class="mobile-notice">
+      <p>This experiment is designed for cursor-based interaction. <br/> For the intended experience, view on a desktop device.</p>
+    </div>
 
-  <div class="mobile-notice">
-    <p>
-      This experiment is designed for cursor-based interaction.<br />
-      For the intended experience, view on a desktop device.
-    </p>
-  </div>
-
-  <div class="overlay-content">
-    <button class="overlay-close" aria-label="Close">
-      ×
-    </button>
-
-    <div class="overlay-inner">
-      <div class="circle"></div>
+    <div class="overlay-content">
+      <button class="overlay-close" aria-label="Close">×</button>
+      <div class="overlay-inner">
+        <div class="circle"></div>
+      </div>
     </div>
   </div>
-</div>
 
-<div class="cursor-dot"></div>
-
+  <div class="cursor-dot"></div>
   <div class="page-transition"></div>
+
   <script src="global.js"></script>
   <script src="script.js"></script>
 </body>
