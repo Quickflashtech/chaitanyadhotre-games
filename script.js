@@ -81,11 +81,14 @@ document.querySelectorAll(".experiment-item").forEach((link) => {
 });
 
 //Reveal transition on page load
-window.addEventListener("load", () => {
+function revealPage() {
   const content = document.querySelector(".page-content");
   if (content) {
     requestAnimationFrame(() => {
       content.classList.add("is-visible");
     });
   }
-});
+}
+
+window.addEventListener("load", revealPage);
+window.addEventListener("pageshow", revealPage);
