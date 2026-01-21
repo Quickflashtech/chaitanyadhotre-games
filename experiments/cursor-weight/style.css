@@ -1,67 +1,8 @@
-html, body {
-  width: 100%;
-  height: 100%;
-  margin: 0;
-  padding: 0;
-  background: #0b0b0b;
-  color: #f5f5f5;
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
-}
-
-/* Global rules */
-html,
-body,
-* {
-  cursor: none !important;
-}
-
-
-
-.circle {
-  position: absolute;
-  width: 85px;
-  height: 85px;
-  background: #f2f2f2;
-  border-radius: 50%;
-  transform: translate(-50%, -50%);
-}
-
-/* Custom cursor dot */
-.cursor-dot {
-  position: fixed;
-  width: 18px;
-  height: 18px;
-  border-radius: 50%;
-  background: rgba(255, 255, 255, 0.9);
-  transform: translate(-50%, -50%);
-  pointer-events: none;
-  z-index: 9999;
-  transition:
-    width 380ms ease,
-    height 380ms ease,
-    opacity 250ms ease,
-    background-color 200ms ease;
-    opacity: 1;
-    mix-blend-mode: difference;
-}
-
-.cursor-dot.cursor-active {
-  width: 38px;
-  height: 38px;
-  background-color: rgba(255, 255, 255, 0.7);
-}
-
-.cursor-hover {
-  background: rgba(255, 255, 255, 0.6);
-}
-
-/* Overlay base */
-
+/* Custom styles for the Cursor Weight experiment */
 .overlay {
   position: fixed;
   inset: 0;
   z-index: 1000;
-  pointer-events: none;
 }
 
 .overlay-bg {
@@ -73,22 +14,14 @@ body,
 }
 
 .overlay-content {
-  background: rgba(255, 255, 255, 0.02);
-  pointer-events: none;
   position: absolute;
   inset: 0;
   display: flex;
   align-items: center;
   justify-content: center;
   opacity: 0;
-  transform: translateY(6px);
-  transition:
-    opacity 450ms ease,
-    transform 450ms ease;
-}
-
-.overlay.active {
-  pointer-events: auto;
+  transform: scale(0.97);
+  transition: opacity 320ms ease-out, transform 520ms cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .overlay.active .overlay-bg {
@@ -97,120 +30,27 @@ body,
 
 .overlay.active .overlay-content {
   opacity: 1;
-  transform: translateY(0);
+  transform: scale(1);
   pointer-events: auto;
 }
 
-/* Close button */
-
-.overlay-close {
+.circle {
   position: absolute;
-  top: 32px;
-  right: 40px;
-  background: none;
-  border: none;
-  color: #f5f5f5;
-  font-size: 28px;
-  opacity: 0.6;
-  transition: opacity 200ms ease, transform 200ms ease;
-  z-index: 2;
+  width: 85px;
+  height: 85px;
+  background: #f2f2f2;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
 }
 
-.overlay-close:hover {
-  opacity: 1;
-  transform: scale(1.15);
-}
-
-/* Experiment: Cursor Weight (visual only) */
-
-.overlay-inner {
-  position: relative;
-  width: 100%;
-  height: 100%;
-}
-
-/* Experiment hint */
 .experiment-hint {
   position: fixed;
   top: 24px;
   left: 50%;
   transform: translateX(-50%);
-
   font-size: 14px;
   opacity: 0.6;
   pointer-events: none;
   user-select: none;
-
   transition: opacity 600ms ease;
 }
-
-/* Mobile users notice */
-.mobile-notice {
-  display: none;
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 32px;
-  padding: 0 24px;
-  text-align: center;
-  font-size: 14px;
-  line-height: 1.6;
-  opacity: 0.65;
-  pointer-events: none;
-  user-select: none;
-  transition: opacity 200ms ease;
-}
-
-/* Transition page */
-.page-transition {
-  position: fixed;
-  inset: 0;
-  background: #0b0b0b;
-  z-index: 99999;
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 280ms ease;
-}
-
-.page-transition.active {
-  opacity: 1;
-}
-
-
-@media (max-width: 768px) {
-
-  body{
-    font-size: 15px;
-  }
-    
-  .overlay.active .experiment-content {
-    display: none;
-  }
-
-  .mobile-notice {
-    font-size: 13px;
-    opacity: 0.6;
-  }
-    
-  .overlay.active .mobile-notice {
-    display: flex;
-  }
-   .overlay.active {
-    background: rgba(0, 0, 0, 0.85);
-  }
-  
-}
-
-
-/* Hide cursor on mobile */
-@media (max-width: 768px) {
-  html,
-  body {
-    cursor: auto;
-  }
-
-  .cursor-dot {
-    display: none !important;
-  }
-}
-
