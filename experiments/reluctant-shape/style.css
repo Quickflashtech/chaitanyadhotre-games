@@ -131,27 +131,25 @@
 /* Mobile users notice */
 .mobile-notice {
   display: none;
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 32px;
+  padding: 0 24px;
+  text-align: center;
+  font-size: 14px;
+  line-height: 1.6;
+  opacity: 0.65;
+  pointer-events: none;
+  user-select: none;
+  z-index: 1100;
 }
+
 
 @media (max-width: 768px) {
 
   .overlay.active .mobile-notice {
     display: block;
-
-    position: absolute;
-    left: 0;
-    right: 0;
-    bottom: 32px;
-
-    padding: 0 24px;
-    text-align: center;
-
-    font-size: 13px;
-    line-height: 1.6;
-    opacity: 0.65;
-
-    pointer-events: none;
-    user-select: none;
   }
 }
 
