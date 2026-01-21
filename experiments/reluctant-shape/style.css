@@ -129,31 +129,27 @@
 
 /* Mobile users notice */
 .mobile-notice {
-  display: none;  /* Initially hidden */
+  display: block;  /* Set to block by default to ensure visibility */
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 32px;
+  padding: 0 24px;
+  text-align: center;
+  font-size: 14px; /* Default font size for readability */
+  line-height: 1.6;
+  opacity: 0.75;  /* Slight opacity for the background effect */
+  pointer-events: none;
+  user-select: none;
+  color: #f5f5f5; /* Ensuring contrast and visibility on dark background */
+  z-index: 1100; /* Ensure it sits above other content */
 }
 
 @media (max-width: 768px) {
-  /* Show mobile notice on mobile screens */
   .mobile-notice {
-    display: block;  /* Ensure it's visible */
-    position: absolute;
-    left: 0;
-    right: 0;
-    bottom: 32px;
-    padding: 0 24px;
-    text-align: center;
-    font-size: 13px;
-    line-height: 1.6;
-    opacity: 0.65;
-    pointer-events: none;
-    user-select: none;
-    z-index: 1100; /* Ensure it's above other elements */
-  }
-
-  /* Adjust the font size for better readability on mobile */
-  .mobile-notice p {
-    font-size: 16px;
-    color: #f5f5f5;
+    font-size: 13px;  /* Adjust size slightly on mobile */
+    opacity: 0.85;
+    display: block;  /* Ensure it is displayed on mobile */
   }
 }
   
