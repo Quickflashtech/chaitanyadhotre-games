@@ -1,157 +1,42 @@
-/* =========================
-   Overlay base (experiment)
-   ========================= */
-
-.overlay,
+/* Custom styles for the Reluctant Shape experiment */
 .overlay-content {
-  pointer-events: auto;
-}
-
-.overlay-close {
-  pointer-events: auto;
-}
-
-.overlay {
-  position: fixed;
-  inset: 0;
-  z-index: 1000;
-  pointer-events: none;
-}
-
-.overlay-bg {
-  position: absolute;
-  inset: 0;
-  background: rgba(0, 0, 0, 0.75);
-  opacity: 0;
-  transition: opacity 360ms ease;
-}
-
-.overlay-content {
-  pointer-events: none;
   background: rgba(255, 255, 255, 0.02);
+  pointer-events: none;
   position: absolute;
   inset: 0;
   opacity: 1;
   transform: none;
 }
 
-/* Page-level motion (same as home) */
-.page-content {
-  opacity: 0;
-  transform: translateY(6px);
-  transition:
-    opacity 450ms ease,
-    transform 450ms ease;
-}
-
-.page-content.is-visible {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-.overlay.active {
-  pointer-events: auto;
-}
-
-.overlay.active .overlay-bg {
-  opacity: 1;
-}
-
-.overlay.active .overlay-content {
-  opacity: 1;
-  transform: scale(1);
-  pointer-events: auto;
-}
-
-.overlay-inner {
-  position: absolute;
-  inset: 0;
-}
-
-.overlay-close {
-  position: absolute;
-  top: 32px;
-  right: 40px;
-
-  background: none;
-  border: none;
-  color: #f5f5f5;
-
-  font-size: 28px;
-  opacity: 0.6;
-   pointer-events:auto;
-   z-index:1200;
-}
-
-.overlay-close:hover {
-  opacity: 1;
-}
-
-
-/* Experiment object */
 .reluctant-stage {
   position: fixed;
   inset: 0;
   pointer-events: none;
 }
- 
+
 .reluctant-circle {
   position: absolute;
   width: 96px;
   height: 96px;
   border-radius: 50%;
   background: #f2f2f2;
-
   left: 0;
   top: 0;
-
   transform: translate(-50%, -50%);
   pointer-events: none;
 }
 
-/* Experiment hint */
 .experiment-hint {
   position: fixed;
   top: 24px;
   left: 50%;
   transform: translateX(-50%);
-
   font-size: 14px;
   line-height: 1.5;
   opacity: 0.6;
   color: #f5f5f5;
   pointer-events: none;
   user-select: none;
-  z-index: 1100; /* Ensure it's above all other content */
-
+  z-index: 1100;
   transition: opacity 600ms ease;
 }
-
-/* Mobile users notice */
-.mobile-notice {
-  display: block;  /* Set to block by default to ensure visibility */
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 32px;
-  padding: 0 24px;
-  text-align: center;
-  font-size: 14px; /* Default font size for readability */
-  line-height: 1.6;
-  opacity: 0.75;  /* Slight opacity for the background effect */
-  pointer-events: none;
-  user-select: none;
-  color: #f5f5f5; /* Ensuring contrast and visibility on dark background */
-  z-index: 1100; /* Ensure it sits above other content */
-}
-
-@media (max-width: 768px) {
-  .mobile-notice {
-    font-size: 13px;  /* Adjust size slightly on mobile */
-    opacity: 0.85;
-    display: block;  /* Ensure it is displayed on mobile */
-  }
-}
-  
-
-
