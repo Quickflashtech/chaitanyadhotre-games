@@ -129,12 +129,13 @@
 
 /* Mobile users notice */
 .mobile-notice {
-  display: none;
+  display: none;  /* Initially hidden */
 }
 
 @media (max-width: 768px) {
-  .overlay.active .mobile-notice {
-    display: block;  /* Make sure mobile notice is shown */
+  /* Show mobile notice on mobile screens */
+  .mobile-notice {
+    display: block;  /* Ensure it's visible */
     position: absolute;
     left: 0;
     right: 0;
@@ -146,7 +147,15 @@
     opacity: 0.65;
     pointer-events: none;
     user-select: none;
+    z-index: 1100; /* Ensure it's above other elements */
   }
+
+  /* Adjust the font size for better readability on mobile */
+  .mobile-notice p {
+    font-size: 16px;
+    color: #f5f5f5;
+  }
+}
   
   /* Ensure the experiment hint is also visible on mobile */
   .experiment-hint {
