@@ -65,15 +65,12 @@ let hintTimeout = null;
 let hintEl = null;
 
 function showHint() {
-  if (window.matchMedia("(max-width: 768px)").matches) return;
-
+  // Show hint for all devices, including mobile
   hintEl = document.createElement("div");
   hintEl.className = "experiment-hint";
   hintEl.textContent = "Move closer. The shape resists.";
 
-const overlay = document.querySelector(".overlay");
-overlay.appendChild(hintEl);
-
+  document.body.appendChild(hintEl);
 
   hintTimeout = setTimeout(() => {
     hintEl.style.opacity = "0";
