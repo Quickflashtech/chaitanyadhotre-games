@@ -10,38 +10,40 @@
 </head>
 <body>
 
-
-  
   <div class="page-content">
 
-  <div class="overlay active">
-    <div class="overlay-bg"></div>
+    <!-- Overlay -->
+    <div class="overlay active">
+      <!-- Mobile notice should be inside the overlay, but outside the overlay-content -->
+      <div class="mobile-notice">
+        <p>
+          This experiment relies on cursor proximity.<br />
+          For the intended experience, view on a desktop device.
+        </p>
+      </div>
 
-        <div class="mobile-notice">
-          <p>
-            This experiment relies on cursor proximity.<br />
-            For the intended experience, view on a desktop device.
-          </p>
-        </div>
-    
-    <div class="overlay-content">
-      <button class="overlay-close" aria-label="Close">×</button>
+      <!-- Overlay content (interactive part of the experiment) -->
+      <div class="overlay-content">
+        <button class="overlay-close" aria-label="Close">×</button>
 
-      <div class="overlay-inner">
-        <div class="reluctant-stage">
-          <div class="reluctant-circle"></div>
+        <div class="overlay-inner">
+          <div class="reluctant-stage">
+            <div class="reluctant-circle"></div>
+          </div>
         </div>
       </div>
     </div>
+
   </div>
 
-</div>
-
+  <!-- Cursor dot -->
   <div class="cursor-dot"></div>
 
+  <!-- Page transition element -->
   <div class="page-transition"></div>
-<script src="../../cursor.js"></script>
-<script src="script.js"></script>
+
+  <script src="../../cursor.js"></script>
+  <script src="script.js"></script>
 
 </body>
 </html>
