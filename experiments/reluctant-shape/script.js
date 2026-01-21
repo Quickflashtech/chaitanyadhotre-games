@@ -71,7 +71,9 @@ function showHint() {
   hintEl.className = "experiment-hint";
   hintEl.textContent = "Move closer. The shape resists.";
 
-  document.body.appendChild(hintEl);
+const overlay = document.querySelector(".overlay");
+overlay.appendChild(hintEl);
+
 
   hintTimeout = setTimeout(() => {
     hintEl.style.opacity = "0";
