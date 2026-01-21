@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Reluctant Shape</title>
+  <link rel="stylesheet" href="global.css" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <div class="page-content">
+    <!-- Overlay -->
+    <div class="overlay active">
+      <!-- Mobile notice should be inside the overlay, but outside the overlay-content -->
+      <div class="mobile-notice">
+        <p>
+          This experiment relies on cursor proximity.<br />
+          For the intended experience, view on a desktop device.
+        </p>
+      </div>
+
+      <!-- Overlay content (interactive part of the experiment) -->
+      <div class="overlay-content">
+        <button class="overlay-close" aria-label="Close">×</button>
+
+        <div class="overlay-inner">
+          <div class="reluctant-stage">
+            <div class="reluctant-circle"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Cursor dot -->
+  <div class="cursor-dot"></div>
+
+  <!-- Page transition element -->
+  <div class="page-transition"></div>
+
+  <script src="global.js"></script>
+  <script src="script.js"></script>
+
+</body>
+</html>
