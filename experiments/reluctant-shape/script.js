@@ -41,16 +41,17 @@ function closeExperiment() {
   removeHint();
 
   if (!pageTransition) {
-    window.history.back();
+    window.location.href = "../../index.html";
     return;
   }
 
   pageTransition.classList.add("active");
 
   setTimeout(() => {
-    window.history.back();
+    window.location.href = "../../index.html";
   }, 280);
 }
+
 
 if (closeBtn) {
   closeBtn.addEventListener("click", closeExperiment);
