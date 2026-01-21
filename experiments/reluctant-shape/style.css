@@ -157,11 +157,5 @@
   }
 }
   
-  /* Ensure the experiment hint is also visible on mobile */
-  .experiment-hint {
-    font-size: 16px; /* Adjust font size for mobile */
-    opacity: 1; /* Ensure it's fully visible */
-  }
-}
 
 
