@@ -1,226 +1,341 @@
 const overlay = document.querySelector(".overlay");
+
 const closeBtn = document.querySelector(".overlay-close");
+
 const overlayBg = document.querySelector(".overlay-bg");
+
 const closeButton = document.querySelector(".overlay-close");
+
 const isMobile = window.matchMedia("(max-width: 768px)").matches;
+
 const transition = document.querySelector(".page-transition");
 
 // exit transition
+
 function exitExperiment() {
-  if (!transition) {
-    window.location.href = "../../index.html";
-    return;
-  }
 
-  transition.classList.add("active");
+if (!transition) {
 
-  setTimeout(() => {
-    window.location.href = "../../index.html";
-  }, 280);
+window.location.href = "../../index.html";
+
+return;
+
+}
+
+transition.classList.add("active");
+
+setTimeout(() => {
+
+window.location.href = "../../index.html";
+
+}, 280);
+
 }
 
 // Exit handling
+
 if (closeBtn) {
-  closeBtn.addEventListener("click", exitExperiment);
+
+closeBtn.addEventListener("click", exitExperiment);
+
 }
 
 window.addEventListener("keydown", (e) => {
-  if (e.key === "Escape") {
-    exitExperiment();
-  }
+
+if (e.key === "Escape") {
+
+exitExperiment();
+
+}
+
 });
 
-
-
 if (isMobile) {
-  document.body.style.cursor = "auto";
+
+document.body.style.cursor = "auto";
+
 }
 
 // Mobile hint
+
 let hintTimeout = null;
+
 let hintElement = null;
+
 let idleTime = 0;
 
 //Show Overlay hint
+
 function showExperimentHint() {
-  // Clean up if something already exists
+
+// Clean up if something already exists
+
+if (hintElement) {
+
+hintElement.remove();
+
+hintElement = null;
+
+}
+
+if (hintTimeout) {
+
+clearTimeout(hintTimeout);
+
+hintTimeout = null;
+
+}
+
+hintElement = document.createElement("div");
+
+hintElement.className = "experiment-hint";
+
+hintElement.textContent =
+
+"Move your cursor. Notice how mass responds.";
+
+overlay.appendChild(hintElement);
+
+hintTimeout = setTimeout(() => {
+
+if (!hintElement) return;
+
+
+
+hintElement.style.opacity = "0";
+
+
+
+setTimeout(() => {
+
   if (hintElement) {
+
     hintElement.remove();
+
     hintElement = null;
-  }
-  if (hintTimeout) {
-    clearTimeout(hintTimeout);
-    hintTimeout = null;
+
   }
 
-  hintElement = document.createElement("div");
-  hintElement.className = "experiment-hint";
-  hintElement.textContent =
-    "Move your cursor. Notice how mass responds.";
+}, 600);
 
-  overlay.appendChild(hintElement);
+}, 6000);
 
-  hintTimeout = setTimeout(() => {
-    if (!hintElement) return;
-
-    hintElement.style.opacity = "0";
-
-    setTimeout(() => {
-      if (hintElement) {
-        hintElement.remove();
-        hintElement = null;
-      }
-    }, 600);
-  }, 6000);
 }
 
 //Overlay hint goes away
-function removeExperimentHint() {
-  if (hintTimeout) {
-    clearTimeout(hintTimeout);
-    hintTimeout = null;
-  }
 
-  if (hintElement) {
-    hintElement.remove();
-    hintElement = null;
-  }
+function removeExperimentHint() {
+
+if (hintTimeout) {
+
+clearTimeout(hintTimeout);
+
+hintTimeout = null;
+
+}
+
+if (hintElement) {
+
+hintElement.remove();
+
+hintElement = null;
+
+}
+
 }
 
 //Overlay open and close logic
+
 function openOverlay() {
-  overlay.classList.add("active");
-  document.body.style.overflow = "hidden";
-  showExperimentHint();
+
+overlay.classList.add("active");
+
+document.body.style.overflow = "hidden";
+
+showExperimentHint();
+
 }
 
-
-
-
 const overlayContent = document.querySelector(".overlay-content");
+
 overlayContent.addEventListener("click", (e) => {
-  e.stopPropagation();
+
+e.stopPropagation();
+
 });
 
-
-
 // Cursor dot logic
+
 const cursorDot = document.querySelector(".cursor-dot");
+
 const EDGE = 20;
 
 if (!isMobile) {
+
 document.addEventListener("mousemove", (e) => {
-  const x = e.clientX;
-  const y = e.clientY;
 
-  // cursor dot
-  cursorDot.style.left = `${x}px`;
-  cursorDot.style.top = `${y}px`;
+const x = e.clientX;
 
-  // weight target
-  targetX = x;
-  targetY = y;
+const y = e.clientY;
 
-  const vw = window.innerWidth;
-  const vh = window.innerHeight;
-  const EDGE = 20;
+// cursor dot
 
-  const nearEdge =
-    x < EDGE ||
-    x > vw - EDGE ||
-    y < EDGE ||
-    y > vh - EDGE;
+cursorDot.style.left = ${x}px;
 
-  cursorDot.style.opacity = nearEdge ? "0" : "1";
+cursorDot.style.top = ${y}px;
+
+// weight target
+
+targetX = x;
+
+targetY = y;
+
+const vw = window.innerWidth;
+
+const vh = window.innerHeight;
+
+const EDGE = 20;
+
+const nearEdge =
+
+x < EDGE ||
+
+x > vw - EDGE ||
+
+y < EDGE ||
+
+y > vh - EDGE;
+
+cursorDot.style.opacity = nearEdge ? "0" : "1";
+
 });
+
 }
 
-
 // Weight physics
+
 const weightCircle = document.querySelector(".circle");
 
 let targetX = window.innerWidth / 2;
+
 let targetY = window.innerHeight / 2;
 
 let currentX = targetX;
+
 let currentY = targetY;
 
 const EASING = 0.04;
 
 let currentScale = 1;
+
 const BASE_SCALE = 1;
+
 const MIN_SCALE = 0.92;
+
 const SCALE_EASING = 0.12;
 
 function animateWeight() {
+
 let adjustedTargetX = targetX;
+
 let adjustedTargetY = targetY;
 
 if (closeButton) {
-  const rect = closeButton.getBoundingClientRect();
-  const cx = rect.left + rect.width / 2;
-  const cy = rect.top + rect.height / 2;
 
-  const dx = targetX - cx;
-  const dy = targetY - cy;
-  const distance = Math.sqrt(dx * dx + dy * dy);
+const rect = closeButton.getBoundingClientRect();
 
-  const AVOID_RADIUS = 100;   // how close before repulsion
-  const PUSH_STRENGTH = 50;  // how strongly it moves away
+const cx = rect.left + rect.width / 2;
 
-  if (distance < AVOID_RADIUS && distance > 0.001) {
-    const force = (AVOID_RADIUS - distance) / AVOID_RADIUS;
-    adjustedTargetX += (dx / distance) * force * PUSH_STRENGTH;
-    adjustedTargetY += (dy / distance) * force * PUSH_STRENGTH;
-  }
+const cy = rect.top + rect.height / 2;
+
+const dx = targetX - cx;
+
+const dy = targetY - cy;
+
+const distance = Math.sqrt(dx * dx + dy * dy);
+
+const AVOID_RADIUS = 100;   // how close before repulsion
+
+const PUSH_STRENGTH = 50;  // how strongly it moves away
+
+if (distance < AVOID_RADIUS && distance > 0.001) {
+
+const force = (AVOID_RADIUS - distance) / AVOID_RADIUS;
+
+adjustedTargetX += (dx / distance) * force * PUSH_STRENGTH;
+
+adjustedTargetY += (dy / distance) * force * PUSH_STRENGTH;
+
 }
 
-  if (isMobile) {
-  idleTime += 0.01;
+}
 
-  adjustedTargetX =
-    window.innerWidth / 2 + Math.sin(idleTime) * 40;
+if (isMobile) {
 
-  adjustedTargetY =
-    window.innerHeight / 2 + Math.cos(idleTime * 0.8) * 30;
+idleTime += 0.01;
+
+adjustedTargetX =
+
+window.innerWidth / 2 + Math.sin(idleTime) * 40;
+
+adjustedTargetY =
+
+window.innerHeight / 2 + Math.cos(idleTime * 0.8) * 30;
+
 }
 
 currentX += (adjustedTargetX - currentX) * EASING;
+
 currentY += (adjustedTargetY - currentY) * EASING;
 
-    const dx = targetX - currentX;
-  const dy = targetY - currentY;
-  const speed = Math.sqrt(dx * dx + dy * dy);
+const dx = targetX - currentX;
+
+const dy = targetY - currentY;
+
+const speed = Math.sqrt(dx * dx + dy * dy);
 
 // Map speed to scale (clamped)
-  const speedFactor = Math.min(speed / 120, 1); // 0 → 1
-  const targetScale =
-  BASE_SCALE - speedFactor * (BASE_SCALE - MIN_SCALE);
+
+const speedFactor = Math.min(speed / 120, 1); // 0 → 1
+
+const targetScale =
+
+BASE_SCALE - speedFactor * (BASE_SCALE - MIN_SCALE);
 
 // Smooth scale toward target
-  currentScale += (targetScale - currentScale) * SCALE_EASING;
 
-  weightCircle.style.left = `${currentX}px`;
-  weightCircle.style.top = `${currentY}px`;
-  weightCircle.style.transform = `translate(-50%, -50%) scale(${currentScale})`;
+currentScale += (targetScale - currentScale) * SCALE_EASING;
 
-  requestAnimationFrame(animateWeight);
+weightCircle.style.left = ${currentX}px;
+
+weightCircle.style.top = ${currentY}px;
+
+weightCircle.style.transform = translate(-50%, -50%) scale(${currentScale});
+
+requestAnimationFrame(animateWeight);
+
 }
 
-  animateWeight();
-
+animateWeight();
 
 // Button hover logic
+
 const hoverTargets = document.querySelectorAll("button");
 
 hoverTargets.forEach((el) => {
-  el.addEventListener("mouseenter", () => {
-    cursorDot.classList.add("cursor-hover");
-  });
 
-  el.addEventListener("mouseleave", () => {
-    cursorDot.classList.remove("cursor-hover");
-  });
+el.addEventListener("mouseenter", () => {
+
+cursorDot.classList.add("cursor-hover");
+
+});
+
+el.addEventListener("mouseleave", () => {
+
+cursorDot.classList.remove("cursor-hover");
+
+});
+
 });
 
 openOverlay();
