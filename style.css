@@ -82,6 +82,16 @@ html, body {
     background-color 200ms ease;
 }
 
+.cursor-dot.cursor-active {
+  width: 38px;
+  height: 38px;
+  background-color: rgba(255, 255, 255, 0.7);
+}
+
+.cursor-hover {
+  background: rgba(255, 255, 255, 0.6);
+}
+
 /* =========================
    Page Transition
 ========================= */

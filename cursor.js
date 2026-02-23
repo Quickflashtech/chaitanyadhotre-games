@@ -18,7 +18,28 @@ if (cursorDot && window.matchMedia("(min-width: 769px)").matches) {
       e.clientY > vh - EDGE;
 
     cursorDot.style.opacity = nearEdge ? "0" : "1";
+  });
 
+  // General hover effect (links + buttons)
+  document.querySelectorAll("a, button").forEach((el) => {
+    el.addEventListener("mouseenter", () => {
+      cursorDot.classList.add("cursor-hover");
+    });
+
+    el.addEventListener("mouseleave", () => {
+      cursorDot.classList.remove("cursor-hover");
+    });
+  });
+
+  // Expand cursor on experiment items
+  document.querySelectorAll(".experiment-item").forEach((el) => {
+    el.addEventListener("mouseenter", () => {
+      cursorDot.classList.add("cursor-active");
+    });
+
+    el.addEventListener("mouseleave", () => {
+      cursorDot.classList.remove("cursor-active");
+    });
   });
 
 }
