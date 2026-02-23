@@ -4,26 +4,30 @@
 
 const transition = document.querySelector(".page-transition");
 
-// Fade OUT when navigating to experiment
-document.querySelectorAll(".experiment-item").forEach((link) => {
-  link.addEventListener("click", (e) => {
-    e.preventDefault();
+// Fade OUT when navigating from homepage
+const experimentLinks = document.querySelectorAll(".experiment-item");
 
-    const href = link.getAttribute("href");
+if (experimentLinks.length > 0) {
+  experimentLinks.forEach((link) => {
+    link.addEventListener("click", (e) => {
+      e.preventDefault();
 
-    if (transition) {
-      transition.classList.add("active");
+      const href = link.getAttribute("href");
 
-      setTimeout(() => {
+      if (transition) {
+        transition.classList.add("active");
+
+        setTimeout(() => {
+          window.location.href = href;
+        }, 280);
+      } else {
         window.location.href = href;
-      }, 280);
-    } else {
-      window.location.href = href;
-    }
+      }
+    });
   });
-});
+}
 
-// Fade IN on load
+// Fade IN on load (all pages)
 window.addEventListener("load", () => {
   if (transition) {
     transition.classList.remove("active");
@@ -36,22 +40,25 @@ window.addEventListener("load", () => {
 
 const closeBtn = document.querySelector(".experiment-close");
 
-if (closeBtn) {
-  closeBtn.addEventListener("click", () => {
-    transition.classList.add("active");
+function exitExperiment() {
+  if (!transition) {
+    window.location.href = "../../index.html";
+    return;
+  }
 
-    setTimeout(() => {
-      window.location.href = "../../index.html";
-    }, 280);
-  });
+  transition.classList.add("active");
+
+  setTimeout(() => {
+    window.location.href = "../../index.html";
+  }, 280);
+}
+
+if (closeBtn) {
+  closeBtn.addEventListener("click", exitExperiment);
 }
 
 window.addEventListener("keydown", (e) => {
   if (e.key === "Escape" && closeBtn) {
-    transition.classList.add("active");
-
-    setTimeout(() => {
-      window.location.href = "../../index.html";
-    }, 280);
+    exitExperiment();
   }
 });

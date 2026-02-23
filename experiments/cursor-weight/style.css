@@ -1,0 +1,17 @@
+/* =========================
+   Cursor Weight Visuals
+========================= */
+
+.weight-stage {
+  position: fixed;
+  inset: 0;
+}
+
+.weight-circle {
+  position: absolute;
+  width: 85px;
+  height: 85px;
+  background: #f2f2f2;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+}

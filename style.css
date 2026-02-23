@@ -243,3 +243,36 @@ html, body {
   }
 
 }
+
+
+/* =========================
+   Inside experiments
+========================= */
+
+
+/* =========================
+   Experiment Close Button
+========================= */
+
+.experiment-close {
+  position: fixed;
+  top: 32px;
+  right: 40px;
+
+  background: none;
+  border: none;
+  color: #f5f5f5;
+
+  font-size: 28px;
+  opacity: 0.6;
+
+  cursor: none;
+  z-index: 1000;
+
+  transition: opacity 200ms ease, transform 200ms ease;
+}
+
+.experiment-close:hover {
+  opacity: 1;
+  transform: scale(1.15);
+}
