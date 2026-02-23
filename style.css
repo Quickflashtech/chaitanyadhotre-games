@@ -60,6 +60,86 @@ html, body {
   opacity: 0.45;
 }
 
+
+/* =========================
+   Experiments List
+========================= */
+
+.experiments {
+  margin-top: 100px;
+}
+
+.experiment-item {
+  display: flex;
+  align-items: baseline;
+  gap: 24px;
+
+  text-decoration: none;
+  color: inherit;
+  font-size: 28px;
+
+  width: fit-content;
+  position: relative;
+
+  transition: transform 300ms ease, opacity 300ms ease;
+}
+
+.experiment-item:hover {
+  transform: translateX(6px);
+}
+
+.index-col {
+  display: flex;
+  align-self: stretch;
+}
+
+.index {
+  font-size: 28px;
+  line-height: 1.1;
+  opacity: 0.35;
+
+    position: relative;
+  top: 4px;
+
+  transition:
+    font-size 240ms ease,
+    line-height 240ms ease,
+    opacity 300ms ease;
+}
+
+.experiment-item:hover .index {
+  font-size: 44px;
+  line-height: 1.15;
+  opacity: 0.75;
+  
+}
+
+.experiment-text {
+  display: flex;
+  flex-direction: column;
+}
+
+.experiment-text .meta {
+  margin-top: 6px;
+  font-size: 13px;
+  opacity: 0;
+  max-height: 0;
+  overflow: hidden;
+
+  transform: translateY(-2px);
+
+  transition:
+    opacity 240ms ease,
+    transform 240ms ease,
+    max-height 240ms ease;
+}
+
+.experiment-item:hover .meta {
+  opacity: 0.5;
+  max-height: 40px;
+  transform: translateY(0);
+}
+
 /* =========================
    Cursor
 ========================= */
