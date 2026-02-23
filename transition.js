@@ -29,3 +29,29 @@ window.addEventListener("load", () => {
     transition.classList.remove("active");
   }
 });
+
+// =====================
+// Experiment Close Logic
+// =====================
+
+const closeBtn = document.querySelector(".experiment-close");
+
+if (closeBtn) {
+  closeBtn.addEventListener("click", () => {
+    transition.classList.add("active");
+
+    setTimeout(() => {
+      window.location.href = "../../index.html";
+    }, 280);
+  });
+}
+
+window.addEventListener("keydown", (e) => {
+  if (e.key === "Escape" && closeBtn) {
+    transition.classList.add("active");
+
+    setTimeout(() => {
+      window.location.href = "../../index.html";
+    }, 280);
+  }
+});
