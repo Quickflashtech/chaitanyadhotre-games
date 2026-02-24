@@ -1,5 +1,16 @@
 const circle = document.querySelector(".weight-circle");
 const weightCloseBtn = document.querySelector(".experiment-close");
+  const hint = document.querySelector(".experiment-hint");
+
+  if (hint) {
+    setTimeout(() => {
+      hint.style.opacity = "0";
+
+      setTimeout(() => {
+        hint.remove();
+      }, 600);
+    }, 5000);
+  }
 
 let targetX = window.innerWidth / 2;
 let targetY = window.innerHeight / 2;
