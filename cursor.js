@@ -7,17 +7,24 @@ if (cursorDot && window.matchMedia("(min-width: 769px)").matches) {
     cursorDot.style.left = `${e.clientX}px`;
     cursorDot.style.top = `${e.clientY}px`;
 
-    const EDGE = 20;
+    const EDGE = 40;
     const vw = window.innerWidth;
     const vh = window.innerHeight;
 
-    const nearEdge =
-      e.clientX < EDGE ||
-      e.clientX > vw - EDGE ||
-      e.clientY < EDGE ||
-      e.clientY > vh - EDGE;
+    const distLeft = e.clientX;
+    const distRight = vw - e.clientX;
+    const distTop = e.clientY;
+    const distBottom = vh - e.clientY;
 
-    cursorDot.style.opacity = nearEdge ? "0" : "1";
+    const minDist = Math.min(distLeft, distRight, distTop, distBottom);
+
+    let opacity = 1;
+
+    if (minDist < EDGE) {
+      opacity = minDist / EDGE;
+    }
+
+    cursorDot.style.opacity = opacity;
   });
 
   // General hover effect (links + buttons)
