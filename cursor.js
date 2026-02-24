@@ -28,7 +28,7 @@ if (cursorDot && window.matchMedia("(min-width: 769px)").matches) {
   });
 
   // General hover effect (links + buttons)
-  document.querySelectorAll("a, button").forEach((el) => {
+  document.querySelectorAll("a, button:not(.experiment-close)").forEach((el) => {
     el.addEventListener("mouseenter", () => {
       cursorDot.classList.add("cursor-hover");
     });
@@ -37,6 +37,7 @@ if (cursorDot && window.matchMedia("(min-width: 769px)").matches) {
       cursorDot.classList.remove("cursor-hover");
     });
   });
+
 
   // Expand cursor on experiment items
   document.querySelectorAll(".experiment-item").forEach((el) => {

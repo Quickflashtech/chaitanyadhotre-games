@@ -280,15 +280,28 @@ html, body {
   color: #f5f5f5;
 
   font-size: 28px;
-  opacity: 0.6;
+  opacity: 0;
+  animation: closeFadeIn 600ms var(--ease-standard) forwards;
+  animation-delay: 200ms;
 
-  cursor: none;
   z-index: 1000;
 
-  transition: opacity var(--duration-fast) var(--ease-standard), transform var(--duration-fast) var(--ease-standard);
+  transform: translateY(0);
+  transition:
+    opacity var(--duration-fast) var(--ease-standard),
+    transform var(--duration-fast) var(--ease-standard);
+}
+
+@keyframes closeFadeIn {
+  to { opacity: 0.6; }
 }
 
 .experiment-close:hover {
   opacity: 1;
-  transform: scale(1.15);
+  transform: translateY(-2px);
+}
+
+.experiment-close:active {
+  transform: translateY(0);
+  opacity: 0.8;
 }
