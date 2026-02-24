@@ -1,3 +1,17 @@
+// Click sounds
+const clickSound = new Audio(
+  document.body.classList.contains("experiment")
+    ? "../../sounds/click.mp3"
+    : "sounds/click.mp3"
+);
+
+clickSound.volume = 0.24;
+
+function playClick() {
+  clickSound.currentTime = 0;
+  clickSound.play().catch(() => {});
+}
+
 // =====================
 // Page Transition System
 // =====================
@@ -15,6 +29,7 @@ if (experimentLinks.length > 0) {
       const href = link.getAttribute("href");
 
       if (transition) {
+        playClick();
         transition.classList.add("active");
 
         setTimeout(() => {
@@ -45,7 +60,7 @@ function exitExperiment() {
     window.location.href = "../../index.html";
     return;
   }
-
+  playClick();
   transition.classList.add("active");
 
   setTimeout(() => {
